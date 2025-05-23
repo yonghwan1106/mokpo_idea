@@ -1,0 +1,32 @@
+# 목포 커넥트 로봇 접근 규칙
+
+User-agent: *
+Allow: /
+
+# 주요 페이지
+Allow: /index.html
+Allow: /problems.html
+Allow: /solution.html
+Allow: /programs.html
+Allow: /implementation.html
+Allow: /benefits.html
+Allow: /trend-analysis.html
+Allow: /youth-statistics.html
+Allow: /benchmarking.html
+
+# 이미지 폴더
+Allow: /img/
+
+# 제외할 파일들
+Disallow: /optimized-script.js
+Disallow: /script.js
+Disallow: /enhanced-script.js
+Disallow: /.htaccess
+Disallow: /백업/
+Disallow: /트렌드 분석실패작/
+
+# 사이트맵 위치
+Sitemap: https://mokpo-connect.kr/sitemap.xml
+
+# 크롤링 지연 (초)
+Crawl-delay: 1

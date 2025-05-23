@@ -335,8 +335,8 @@
             <!-- 체험 프로그램 그리드 -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="programGrid">
                 <!-- 1. 목포 9미 체험 -->
-                <div class="program-card bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
-                     data-category="food" data-rating="4.8" data-price="80000" data-duration="240" onclick="openProgramModal('nineFlavors')">
+                <div class="program-card bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
+                     data-program-id="mokpo-9mi" data-category="food" data-rating="4.8" data-price="80000" data-duration="240">>
                     <div class="relative">
                         <div class="h-48 bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center card-image">
                             <i class="fas fa-utensils text-white text-6xl"></i>
@@ -384,8 +384,8 @@
                 </div>
 
                 <!-- 2. VR 근대역사 체험 -->
-                <div class="program-card bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
-                     data-category="tech culture" data-rating="4.7" data-price="50000" data-duration="120" onclick="openProgramModal('vrHistory')">
+                <div class="program-card bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
+                     data-program-id="history-vr" data-category="tech culture" data-rating="4.7" data-price="50000" data-duration="120">>
                     <div class="relative">
                         <div class="h-48 bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center card-image">
                             <i class="fas fa-vr-cardboard text-white text-6xl"></i>
@@ -433,8 +433,8 @@
                 </div>
 
                 <!-- 3. 다도해 해양 모험 -->
-                <div class="program-card bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
-                     data-category="nature" data-rating="4.6" data-price="120000" data-duration="480" onclick="openProgramModal('seaAdventure')">
+                <div class="program-card bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
+                     data-program-id="marine-adventure" data-category="nature" data-rating="4.6" data-price="120000" data-duration="480">>
                     <div class="relative">
                         <div class="h-48 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center card-image">
                             <i class="fas fa-ship text-white text-6xl"></i>
@@ -956,5 +956,10 @@
             console.log('체험 프로그램 페이지가 성공적으로 로드되었습니다!');
         });
     </script>
+
+    <!-- 체험 프로그램 미리보기 모달 스크립트 -->
+    <script src="program-modal.js"></script>
+    <!-- 실시간 채팅 상담 기능 -->
+    <script src="live-chat-support.js"></script>
 </body>
 </html>

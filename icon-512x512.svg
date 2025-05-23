@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- 배경 그라디언트 -->
+  <defs>
+    <linearGradient id="bg-gradient-large" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#0891b2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bridge-gradient-large" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#fbbf24;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#fbbf24;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg-gradient-large)" rx="102"/>
+  <rect width="512" height="512" fill="url(#center-glow)" rx="102"/>
+  
+  <!-- 바다 물결 효과 -->
+  <path d="M0 350 Q128 330 256 340 Q384 350 512 335 L512 512 L0 512 Z" fill="#0891b2" opacity="0.3"/>
+  <path d="M0 370 Q128 350 256 360 Q384 370 512 355 L512 512 L0 512 Z" fill="#06b6d4" opacity="0.2"/>
+  
+  <!-- 목포 대교 (더욱 상세하게) -->
+  <path d="M80 360 Q160 310 256 330 Q352 310 432 360" stroke="url(#bridge-gradient-large)" stroke-width="12" fill="none"/>
+  <path d="M80 360 Q160 320 256 340 Q352 320 432 360" stroke="#ffffff" stroke-width="6" fill="none" opacity="0.8"/>
+  <path d="M80 360 Q160 325 256 345 Q352 325 432 360" stroke="#fbbf24" stroke-width="3" fill="none" opacity="0.9"/>
+  
+  <!-- 교각 (더 상세하게) -->
+  <ellipse cx="160" cy="315" rx="8" ry="12" fill="#ffffff"/>
+  <ellipse cx="352" cy="315" rx="8" ry="12" fill="#ffffff"/>
+  <line x1="160" y1="315" x2="160" y2="150" stroke="#ffffff" stroke-width="10"/>
+  <line x1="352" y1="315" x2="352" y2="150" stroke="#ffffff" stroke-width="10"/>
+  
+  <!-- 교각 상단 -->
+  <rect x="155" y="145" width="10" height="10" fill="#ffffff" rx="2"/>
+  <rect x="347" y="145" width="10" height="10" fill="#ffffff" rx="2"/>
+  
+  <!-- 케이블들 (더 많은 케이블) -->
+  <path d="M160 150 Q192 170 256 160 Q320 170 352 150" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.9"/>
+  <path d="M160 160 Q192 180 256 170 Q320 180 352 160" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M160 170 Q192 190 256 180 Q320 190 352 170" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M160 180 Q192 200 256 190 Q320 200 352 180" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M160 190 Q192 210 256 200 Q320 210 352 190" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.4"/>
+  
+  <!-- 연결 심볼 (더 크고 역동적으로) -->
+  <circle cx="180" cy="220" r="32" fill="none" stroke="#fbbf24" stroke-width="8"/>
+  <circle cx="332" cy="220" r="32" fill="none" stroke="#fbbf24" stroke-width="8"/>
+  <path d="M212 220 Q256 185 300 220" stroke="#fbbf24" stroke-width="8" fill="none"/>
+  
+  <!-- 내부 연결 패턴 -->
+  <circle cx="190" cy="240" r="6" fill="#fbbf24"/>
+  <circle cx="322" cy="240" r="6" fill="#fbbf24"/>
+  <circle cx="256" cy="200" r="8" fill="#f59e0b"/>
+  <line x1="190" y1="240" x2="256" y2="200" stroke="#fbbf24" stroke-width="3"/>
+  <line x1="322" y1="240" x2="256" y2="200" stroke="#fbbf24" stroke-width="3"/>
+  
+  <!-- 주변 네트워크 노드들 -->
+  <circle cx="120" cy="280" r="4" fill="#fbbf24"/>
+  <circle cx="392" cy="280" r="4" fill="#fbbf24"/>
+  <circle cx="256" cy="260" r="4" fill="#f59e0b"/>
+  
+  <!-- 네트워크 연결선 -->
+  <line x1="120" y1="280" x2="180" y2="220" stroke="#fbbf24" stroke-width="2" opacity="0.7"/>
+  <line x1="392" y1="280" x2="332" y2="220" stroke="#fbbf24" stroke-width="2" opacity="0.7"/>
+  <line x1="256" y1="260" x2="256" y2="200" stroke="#f59e0b" stroke-width="2" opacity="0.8"/>
+  
+  <!-- 로고 텍스트 (더 크고 선명하게) -->
+  <text x="256" y="420" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle">목포</text>
+  <text x="256" y="460" font-family="Arial, sans-serif" font-size="36" fill="#fbbf24" text-anchor="middle">CONNECT</text>
+  
+  <!-- 부제 -->
+  <text x="256" y="485" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" opacity="0.8">청년 × 관광 × 혁신</text>
+</svg>

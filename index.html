@@ -3,10 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>목포 커넥트 - 목포형 청년 창업-관광 융합 플랫폼</title>
+    <title>목포 커넥트 - 목포형 청년 창업-관광 융합 플랫폼 | 2025년 목포시 정책제안</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="목포 커넥트는 청년 창업가와 관광객을 연결하는 혁신적인 디지털 플랫폼입니다. AI 기반 맞춤형 큐레이션과 블록체인 지역화폐로 목포의 지속가능한 성장을 실현합니다.">
+    <meta name="keywords" content="목포, 청년창업, 관광플랫폼, AI큐레이션, 블록체인, 지역경제, 목포시정책, 목포커넥트">
+    <meta name="author" content="목포 커넥트 팀">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Korean">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="목포 커넥트 - 청년이 만드는 목포, 관광객이 발견하는 목포">
+    <meta property="og:description" content="AI와 블록체인 기술로 청년 창업과 관광 산업을 혁신하는 목포형 융합 플랫폼">
+    <meta property="og:image" content="img/mokpo-bridge-just-a-half.jpg">
+    <meta property="og:url" content="https://mokpo-connect.or.kr">
+    <meta property="og:site_name" content="목포 커넥트">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="목포 커넥트 - 청년과 관광을 연결하는 혁신 플랫폼">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="목포 커넥트 - 목포형 청년 창업-관광 융합 플랫폼">
+    <meta name="twitter:description" content="청년 창업가와 관광객을 연결하는 혁신적인 디지털 플랫폼">
+    <meta name="twitter:image" content="img/mokpo-bridge-just-a-half.jpg">
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="192x192" href="icon-192x192.svg">
+    <link rel="icon" type="image/svg+xml" sizes="512x512" href="icon-512x512.svg">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="목포 커넥트">
+    
+    <!-- 프리로드 -->
+    <link rel="preload" href="img/mokpo-bridge-just-a-half.jpg" as="image">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- 스타일시트 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 구조화된 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "목포 커넥트",
+        "description": "목포형 청년 창업-관광 융합 플랫폼",
+        "url": "https://mokpo-connect.or.kr",
+        "logo": "https://mokpo-connect.or.kr/icon-512x512.svg",
+        "foundingDate": "2025",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "목포시",
+            "addressRegion": "전라남도",
+            "addressCountry": "KR"
+        },
+        "sameAs": [
+            "https://www.mokpo.go.kr"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "name": "청년 창업 지원 플랫폼",
+            "description": "AI 기반 맞춤형 체험 프로그램과 블록체인 결제 시스템"
+        }
+    }
+    </script>
+    
+    <!-- Google Analytics (배포시 실제 GA4 ID로 교체 필요) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            page_title: '목포 커넥트 메인',
+            page_location: window.location.href,
+            send_page_view: true
+        });
+    </script>
     <script>
         // Tailwind 커스텀 테마 설정
         tailwind.config = {
@@ -199,6 +285,34 @@
                 font-size: 3rem;
             }
         }
+
+        /* 레이지 로딩 스타일 */
+        .lazy {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy.loaded {
+            opacity: 1;
+        }
+
+        .slide.bg-loaded {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* 로딩 인디케이터 */
+        .loading-bg {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -286,23 +400,23 @@
     <!-- Full-screen Slider Hero Section -->
     <section id="hero" class="hero-slider">
         <!-- 슬라이드 1: 목포 대교 -->
-        <div class="slide active" style="background-image: url('img/mokpo-bridge-just-a-half.jpg')">
+        <div class="slide active" style="background-image: url('img/mokpo-bridge-just-a-half.jpg')" role="img" aria-label="목포대교 전경">
         </div>
         
         <!-- 슬라이드 2: 유달산 -->
-        <div class="slide" style="background-image: url('img/yudalsan-mountain-sunset-view-mokpo-city-over-located-south-korea-taken-right-monsoon-season-192935012.webp')">
+        <div class="slide" data-bg="img/yudalsan-mountain-sunset-view-mokpo-city-over-located-south-korea-taken-right-monsoon-season-192935012.webp" role="img" aria-label="유달산 석양 풍경">
         </div>
         
         <!-- 슬라이드 3: 청년 창업가 -->
-        <div class="slide" style="background-image: url('img/istockphoto-1344939844-612x612.jpg')">
+        <div class="slide" data-bg="img/istockphoto-1344939844-612x612.jpg" role="img" aria-label="청년 창업가들의 모습">
         </div>
         
         <!-- 슬라이드 4: 문화 체험 -->
-        <div class="slide" style="background-image: url('img/istockphoto-1453963806-640x640.jpg')">
+        <div class="slide" data-bg="img/istockphoto-1453963806-640x640.jpg" role="img" aria-label="전통 문화 체험 활동">
         </div>
         
         <!-- 슬라이드 5: 혁신 기술 -->
-        <div class="slide" style="background-image: url('img/istockphoto-1325045111-612x612.jpg')">
+        <div class="slide" data-bg="img/istockphoto-1325045111-612x612.jpg" role="img" aria-label="혁신 기술과 디지털 환경">
         </div>
 
         <!-- 히어로 컨텐츠 -->
@@ -356,16 +470,16 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style="animation-delay: 1.2s;">
-                    <button class="bg-white text-mokpo-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl">
-                        <a href=mokpo_connect.pdf><i class="fas fa-download mr-2"></i>
-                        제안서 다운로드</a>
+                    <button class="bg-white text-mokpo-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl" data-action="download-pdf">
+                        <i class="fas fa-download mr-2"></i>
+                        제안서 다운로드
                     </button>
-<button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-all duration-300"
-        onclick="window.open('https://notebooklm.google.com/notebook/f9399c1a-2c0a-4b04-9819-29be57d5a794/audio', '_blank', 'noopener,noreferrer');">
-    <i class="fas fa-play mr-2"></i>
-    음성으로 듣기
-</button>
-                    <button onclick="scrollToOverview()" class="bg-transparent text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-all duration-300">
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-all duration-300"
+                            onclick="window.open('https://notebooklm.google.com/notebook/f9399c1a-2c0a-4b04-9819-29be57d5a794/audio', '_blank', 'noopener,noreferrer');">
+                        <i class="fas fa-play mr-2"></i>
+                        음성으로 듣기
+                    </button>
+                    <button class="bg-transparent text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-all duration-300" data-action="scroll-to" data-target="#overview">
                         <i class="fas fa-arrow-down mr-2"></i>
                         자세히 보기
                     </button>
@@ -775,7 +889,7 @@
                     <i class="fas fa-road mr-2"></i>
                     실행 계획 확인하기
                 </a>
-                <button class="bg-mokpo-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300">
+                <button class="bg-mokpo-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300" data-action="contact">
                     <i class="fas fa-phone mr-2"></i>
                     지금 문의하기
                 </button>
@@ -824,120 +938,8 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
-    <script>
-        // 히어로 슬라이더 기능
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator');
-            let currentSlide = 0;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                indicators.forEach((indicator, i) => {
-                    indicator.classList.toggle('active', i === index);
-                });
-            }
-
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
-
-            // 자동 슬라이드 (5초마다)
-            setInterval(nextSlide, 5000);
-
-            // 인디케이터 클릭 이벤트
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                });
-            });
-
-            // 네비게이션 바 스크롤 효과
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    navbar.classList.add('navbar-scrolled');
-                    navbar.querySelector('h1').style.color = '#1e3a8a';
-                    navbar.querySelectorAll('a').forEach(link => {
-                        if (!link.classList.contains('text-gray-700')) {
-                            link.style.color = '#374151';
-                        }
-                    });
-                } else {
-                    navbar.classList.remove('navbar-scrolled');
-                    navbar.querySelector('h1').style.color = 'white';
-                    navbar.querySelectorAll('a').forEach(link => {
-                        if (!link.classList.contains('text-gray-700')) {
-                            link.style.color = 'white';
-                        }
-                    });
-                }
-            });
-
-            // 통계 카운터 애니메이션
-            function animateCounters() {
-                const counters = document.querySelectorAll('.stat-counter');
-                
-                counters.forEach(counter => {
-                    const target = parseInt(counter.dataset.target);
-                    const duration = 2000; // 2초
-                    const step = target / (duration / 16); // 60fps 기준
-                    let current = 0;
-
-                    const timer = setInterval(() => {
-                        current += step;
-                        if (current >= target) {
-                            current = target;
-                            clearInterval(timer);
-                        }
-                        
-                        // 숫자 형식화
-                        if (target >= 1000) {
-                            counter.textContent = Math.floor(current).toLocaleString();
-                        } else {
-                            counter.textContent = Math.floor(current);
-                        }
-                    }, 16);
-                });
-            }
-
-            // 스크롤 시 카운터 시작
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounters();
-                        observer.disconnect();
-                    }
-                });
-            });
-
-            const statsSection = document.querySelector('.stat-counter');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-
-            // 스무스 스크롤 함수
-            window.scrollToOverview = function() {
-                document.getElementById('overview').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            };
-
-            // 로더 제거
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 300);
-            }, 1000);
-        });
-    </script>
+    <script src="optimized-script.js"></script>
+    <!-- 실시간 채팅 상담 기능 -->
+    <script src="live-chat-support.js"></script>
 </body>
 </html>
