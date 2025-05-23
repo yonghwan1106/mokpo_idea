@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추진방안 - 목포 커넥트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mokpo-blue': '#2563eb',
+                        'mokpo-navy': '#1e3a8a',
+                        'mokpo-cyan': '#0891b2',
+                        'mokpo-orange': '#ea580c',
+                        'mokpo-yellow': '#fbbf24'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .milestone-timeline {
+            position: relative;
+        }
+
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #2563eb, #0891b2, #ea580c);
+            transform: translateX(-50%);
+        }
+
+        .milestone-item {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .milestone-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .milestone-item:nth-child(1)::before { border-color: #2563eb; }
+        .milestone-item:nth-child(2)::before { border-color: #0891b2; }
+        .milestone-item:nth-child(3)::before { border-color: #ea580c; }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .budget-donut {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* 순차적 애니메이션을 위한 delay 클래스 */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-mokpo-navy">목포 커넥트</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">홈</a>
+                        <a href="problems.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">현황분석</a>
+                        <a href="solution.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">솔루션</a>
+                        <a href="programs.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">체험프로그램</a>
+                        <a href="implementation.html" class="text-mokpo-blue border-b-2 border-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">추진방안</a>
+                        <a href="benefits.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">기대효과</a>
+                        <div class="relative group">
+                            <button class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                분석자료 <i class="fas fa-chevron-down ml-1"></i>
+                            </button>
+                            <div class="absolute right-0 w-48 mt-2 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <a href="trend-analysis.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">트렌드 분석</a>
+                                <a href="youth-statistics.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">청년 현황</a>
+                                <a href="benchmarking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">벤치마킹</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 모바일 메뉴 버튼 -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="bg-gray-100 p-2 rounded-md">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">홈</a>
+                <a href="problems.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">현황분석</a>
+                <a href="solution.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">솔루션</a>
+                <a href="programs.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">체험프로그램</a>
+                <a href="implementation.html" class="block px-3 py-2 bg-mokpo-blue text-white hover:bg-mokpo-navy rounded-md">추진방안</a>
+                <a href="benefits.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">기대효과</a>
+                <div class="border-t border-gray-200 pt-2">
+                    <a href="trend-analysis.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">트렌드 분석</a>
+                    <a href="youth-statistics.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">청년 현황</a>
+                    <a href="benchmarking.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">벤치마킹</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="bg-gradient-to-br from-mokpo-blue via-mokpo-cyan to-blue-600 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center animate-fade-in">
+                <div class="mb-6">
+                    <span class="inline-block bg-white bg-opacity-20 rounded-full px-6 py-2 text-sm font-medium backdrop-blur-sm">
+                        체계적인 단계별 추진전략
+                    </span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    추진방안
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-4xl mx-auto">
+                    실현 가능하고 체계적인 3단계 로드맵으로<br>
+                    목포 커넥트를 성공적으로 구현합니다
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToRoadmap()" class="bg-white text-mokpo-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300">
+                        <i class="fas fa-road mr-2"></i>
+                        로드맵 보기
+                    </button>
+                    <button onclick="scrollToBudget()" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-all duration-300">
+                        <i class="fas fa-money-bill-alt mr-2"></i>
+                        예산 계획 확인
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 전체 전략 개요 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    전략적 추진 개요
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    목포 커넥트는 3년간 3단계로 나누어 체계적으로 구축합니다.<br>
+                    각 단계별 명확한 목표와 성과지표로 성공을 보장합니다.
+                </p>
+            </div>
+
+            <!-- 핵심 전략 원칙 -->
+            <div class="grid md:grid-cols-4 gap-8 mb-16">
+                <div class="text-center card-hover bg-blue-50 rounded-2xl p-8 animate-slide-up delay-100">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-4">단계적 확장</h3>
+                    <p class="text-gray-600 text-sm">
+                        작은 성공부터 시작하여 점진적으로 규모를 확대합니다
+                    </p>
+                </div>
+                
+                <div class="text-center card-hover bg-green-50 rounded-2xl p-8 animate-slide-up delay-200">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-4">사용자 중심</h3>
+                    <p class="text-gray-600 text-sm">
+                        크리에이터와 관광객의 피드백을 바탕으로 지속 개선합니다
+                    </p>
+                </div>
+                
+                <div class="text-center card-hover bg-purple-50 rounded-2xl p-8 animate-slide-up delay-300">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-handshake text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-4">협력 기반</h3>
+                    <p class="text-gray-600 text-sm">
+                        민관 협력과 지역사회 참여로 지속가능성을 확보합니다
+                    </p>
+                </div>
+                
+                <div class="text-center card-hover bg-orange-50 rounded-2xl p-8 animate-slide-up delay-400">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-4">기술 혁신</h3>
+                    <p class="text-gray-600 text-sm">
+                        최신 기술을 활용하여 차별화된 서비스를 제공합니다
+                    </p>
+                </div>
+            </div>
+
+            <!-- 성공 요인 -->
+            <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8">
+                <h3 class="text-3xl font-bold text-center text-mokpo-navy mb-8">
+                    성공을 위한 핵심 요인
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <h4 class="text-lg font-bold text-green-800 mb-4 flex items-center">
+                            <i class="fas fa-shield-alt text-green-600 mr-3"></i>
+                            리스크 최소화
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• 단계적 투자로 리스크 분산</li>
+                            <li>• 베타 테스트를 통한 검증</li>
+                            <li>• 다양한 재원 확보</li>
+                            <li>• 전문가 자문단 구성</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <h4 class="text-lg font-bold text-blue-800 mb-4 flex items-center">
+                            <i class="fas fa-rocket text-blue-600 mr-3"></i>
+                            빠른 실행력
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• 통합 추진체계 구축</li>
+                            <li>• 명확한 의사결정 라인</li>
+                            <li>• 애자일 개발 방법론</li>
+                            <li>• 정기적 성과 점검</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <h4 class="text-lg font-bold text-purple-800 mb-4 flex items-center">
+                            <i class="fas fa-chart-bar text-purple-600 mr-3"></i>
+                            데이터 기반 의사결정
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• 실시간 모니터링 시스템</li>
+                            <li>• KPI 기반 성과 측정</li>
+                            <li>• 사용자 행동 분석</li>
+                            <li>• 지속적 개선 프로세스</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3단계 로드맵 -->
+    <section id="roadmap" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    3단계 추진 로드맵
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    기반 구축부터 글로벌 확산까지 체계적인 단계별 추진 계획
+                </p>
+            </div>
+
+            <div class="milestone-timeline max-w-6xl mx-auto">
+                <!-- 1단계: 기반 구축 -->
+                <div class="milestone-item">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-mokpo-blue rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-rocket text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold text-mokpo-navy">1단계: 기반 구축</h3>
+                                    <p class="text-gray-500 text-lg">2025년 7월 ~ 12월 (6개월)</p>
+                                    <p class="text-mokpo-blue font-semibold">투입 예산: 5억원</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold text-mokpo-navy mb-3">핵심 업무</h4>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                            <span>플랫폼 MVP 개발 및 베타 테스트</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                            <span>창작 공간 5곳 확보 및 리모델링</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                            <span>AI/블록체인 기반 기술 구축</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                            <span>목포페이 연동 시스템 개발</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-mokpo-navy mb-3">인력 및 프로그램</h4>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-user-graduate text-blue-500 mr-2 mt-1"></i>
+                                            <span>크리에이터 100명 모집 및 교육</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-chalkboard-teacher text-blue-500 mr-2 mt-1"></i>
+                                            <span>체계적 교육 프로그램 운영</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-lightbulb text-blue-500 mr-2 mt-1"></i>
+                                            <span>기본 체험 프로그램 20종 개발</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-chart-line text-blue-500 mr-2 mt-1"></i>
+                                            <span>베타 서비스 피드백 수집</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-blue-800 mb-2">
+                                    <i class="fas fa-bullseye mr-2"></i>1단계 목표 성과
+                                </h5>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-blue-600">100명</div>
+                                        <div class="text-gray-600">크리에이터 모집</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-blue-600">20종</div>
+                                        <div class="text-gray-600">체험 프로그램</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-blue-600">5곳</div>
+                                        <div class="text-gray-600">창작 공간</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-blue-600">1만건</div>
+                                        <div class="text-gray-600">베타 예약</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center lg:text-left">
+                            <div class="inline-block bg-gradient-to-br from-blue-100 to-blue-200 rounded-3xl p-8">
+                                <h4 class="text-2xl font-bold text-mokpo-navy mb-4">1단계 주요 마일스톤</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">7</span>
+                                        </div>
+                                        <span>플랫폼 개발 착수 및 팀 구성</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">9</span>
+                                        </div>
+                                        <span>크리에이터 모집 및 교육 시작</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">11</span>
+                                        </div>
+                                        <span>베타 서비스 출시 및 테스트</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">12</span>
+                                        </div>
+                                        <span>1단계 성과 평가 및 개선</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2단계: 서비스 확산 -->
+                <div class="milestone-item">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="order-2 lg:order-1 text-center lg:text-right">
+                            <div class="inline-block bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-3xl p-8">
+                                <h4 class="text-2xl font-bold text-mokpo-navy mb-4">2단계 주요 마일스톤</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">1</span>
+                                        </div>
+                                        <span>플랫폼 정식 런칭 및 마케팅</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">4</span>
+                                        </div>
+                                        <span>전국 마케팅 캠페인 시작</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">8</span>
+                                        </div>
+                                        <span>파트너십 확장 및 패키지 출시</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">12</span>
+                                        </div>
+                                        <span>연간 성과 달성 및 3단계 준비</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-1 lg:order-2 bg-white rounded-2xl shadow-xl p-8 card-hover">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-mokpo-cyan rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-chart-line text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold text-mokpo-navy">2단계: 서비스 확산</h3>
+                                    <p class="text-gray-500 text-lg">2026년 1월 ~ 12월 (12개월)</p>
+                                    <p class="text-mokpo-cyan font-semibold">투입 예산: 5억원</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold text-mokpo-navy mb-3">서비스 확장</h4>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-rocket text-cyan-500 mr-2 mt-1"></i>
+                                            <span>플랫폼 정식 런칭</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-megaphone text-cyan-500 mr-2 mt-1"></i>
+                                            <span>전국 대상 마케팅 캠페인</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-expand text-cyan-500 mr-2 mt-1"></i>
+                                            <span>체험 프로그램 50종으로 확장</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-gift text-cyan-500 mr-2 mt-1"></i>
+                                            <span>패키지 상품 개발</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-mokpo-navy mb-3">파트너십 구축</h4>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-bed text-cyan-500 mr-2 mt-1"></i>
+                                            <span>숙박업체 계열 협약</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-bus text-cyan-500 mr-2 mt-1"></i>
+                                            <span>교통업체 협력 체계</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-store text-cyan-500 mr-2 mt-1"></i>
+                                            <span>지역상권과의 상생 협력</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-handshake text-cyan-500 mr-2 mt-1"></i>
+                                            <span>관광협의회와의 연계</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-cyan-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-cyan-800 mb-2">
+                                    <i class="fas fa-bullseye mr-2"></i>2단계 목표 성과
+                                </h5>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-cyan-600">300명</div>
+                                        <div class="text-gray-600">크리에이터 확대</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-cyan-600">50종</div>
+                                        <div class="text-gray-600">체험 프로그램</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-cyan-600">5만건</div>
+                                        <div class="text-gray-600">연간 예약</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-cyan-600">4.5점</div>
+                                        <div class="text-gray-600">만족도 달성</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3단계: 고도화 및 확산 -->
+                <div class="milestone-item">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-mokpo-orange rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-globe text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold text-mokpo-navy">3단계: 고도화 및 확산</h3>
+                                    <p class="text-gray-500 text-lg">2027년 1월 ~ 2028년 6월 (18개월)</p>
+                                    <p class="text-mokpo-orange font-semibold">투입 예산: 5억원</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold text-mokpo-navy mb-3">기술 고도화</h4>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-brain text-orange-500 mr-2 mt-1"></i>
+                                            <span>AI 맞춤형 서비스 고도화</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-wifi text-orange-500 mr-2 mt-1"></i>
+                                            <span>IoT 기반 실시간 모니터링</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-language text-orange-500 mr-2 mt-1"></i>
+                                            <span>다국어 서비스 확장</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-vr-cardboard text-orange-500 mr-2 mt-1"></i>
+                                            <span>메타버스 체계 서비스</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-mokpo-navy mb-3">확산 및 수출</h4>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-map-marked-alt text-orange-500 mr-2 mt-1"></i>
+                                            <span>타 지자체 모델 수출</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-store text-orange-500 mr-2 mt-1"></i>
+                                            <span>프랜차이즈 시스템 구축</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-building text-orange-500 mr-2 mt-1"></i>
+                                            <span>독립 법인화 추진</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-plane text-orange-500 mr-2 mt-1"></i>
+                                            <span>해외 진출 기반 마련</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-orange-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-orange-800 mb-2">
+                                    <i class="fas fa-bullseye mr-2"></i>3단계 목표 성과
+                                </h5>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-orange-600">500명</div>
+                                        <div class="text-gray-600">최종 크리에이터</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-orange-600">100종</div>
+                                        <div class="text-gray-600">체험 프로그램</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-orange-600">10만건</div>
+                                        <div class="text-gray-600">연간 예약</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-orange-600">4.8점</div>
+                                        <div class="text-gray-600">최종 만족도</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center lg:text-left">
+                            <div class="inline-block bg-gradient-to-br from-orange-100 to-orange-200 rounded-3xl p-8">
+                                <h4 class="text-2xl font-bold text-mokpo-navy mb-4">3단계 주요 마일스톤</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">3</span>
+                                        </div>
+                                        <span>AI/IoT 기술 고도화 완료</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">6</span>
+                                        </div>
+                                        <span>첫 번째 모델 수출 성공</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">12</span>
+                                        </div>
+                                        <span>독립 법인화 및 민간 투자 유치</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                            <span class="text-white text-sm font-bold">18</span>
+                                        </div>
+                                        <span>해외 진출 기반 완성</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 예산 계획 섹션 -->
+    <section id="budget" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    예산 계획 및 재원 조달
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    총 15억원 규모의 체계적인 예산 계획과 다양한 재원 확보 방안
+                </p>
+            </div>
+
+            <!-- 총괄 예산 현황 -->
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 mb-16">
+                <h3 class="text-3xl font-bold text-center text-mokpo-navy mb-8">
+                    총 사업비 15억원 재원 조달 계획
+                </h3>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="budget-donut">
+                        <canvas id="budgetChart" width="300" height="300"></canvas>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <h4 class="text-lg font-bold text-blue-800 mb-3">국비 지원 (50% - 7.5억원)</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>중소벤처기업부:</strong> 청년창업 플랫폼 구축사업 5억원</p>
+                                <p><strong>문화체육관광부:</strong> 지역관광 혁신사업 2.5억원</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <h4 class="text-lg font-bold text-cyan-800 mb-3">시비 지원 (30% - 4.5억원)</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>청년정책 특별회계:</strong> 2억원</p>
+                                <p><strong>관광진흥기금:</strong> 1.5억원</p>
+                                <p><strong>지역혁신특화사업비:</strong> 1억원</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <h4 class="text-lg font-bold text-orange-800 mb-3">민간 투자 (20% - 3억원)</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>크라우드펀딩:</strong> 1억원</p>
+                                <p><strong>지역기업 협찬:</strong> 1억원</p>
+                                <p><strong>벤처캐피털 투자:</strong> 1억원</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 연도별 예산 배분 -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-blue-50 rounded-2xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-xl font-bold">1년차</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-mokpo-navy">2025년</h3>
+                        <p class="text-3xl font-bold text-blue-600 mt-2">5억원</p>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>플랫폼 개발</span>
+                            <span class="font-semibold">2억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>공간 조성</span>
+                            <span class="font-semibold">1.5억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>인력 및 교육</span>
+                            <span class="font-semibold">1억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>운영비</span>
+                            <span class="font-semibold">0.5억원</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cyan-50 rounded-2xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-xl font-bold">2년차</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-mokpo-navy">2026년</h3>
+                        <p class="text-3xl font-bold text-cyan-600 mt-2">5억원</p>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>서비스 확산</span>
+                            <span class="font-semibold">2억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>마케팅</span>
+                            <span class="font-semibold">1.5억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>파트너십</span>
+                            <span class="font-semibold">1억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>운영 및 관리</span>
+                            <span class="font-semibold">0.5억원</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 rounded-2xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-xl font-bold">3년차</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-mokpo-navy">2027-2028년</h3>
+                        <p class="text-3xl font-bold text-orange-600 mt-2">5억원</p>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>기술 고도화</span>
+                            <span class="font-semibold">2억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>확산 및 수출</span>
+                            <span class="font-semibold">1.5억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>법인화</span>
+                            <span class="font-semibold">1억원</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>운영 안정화</span>
+                            <span class="font-semibold">0.5억원</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 성과 예측 차트 -->
+            <div class="bg-gray-50 rounded-3xl p-8">
+                <h3 class="text-3xl font-bold text-center text-mokpo-navy mb-8">
+                    3년간 성과 예측 분석
+                </h3>
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div>
+                        <canvas id="performanceChart" height="300"></canvas>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <h4 class="text-lg font-bold text-green-800 mb-3">예상 수익 구조</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li>• <strong>1년차:</strong> 투자 회수 기간 (Break-even 준비)</li>
+                                <li>• <strong>2년차:</strong> 수익 전환점 달성 (연간 +2억원)</li>
+                                <li>• <strong>3년차:</strong> 본격적 수익 창출 (연간 +15억원)</li>
+                                <li>• <strong>누적 ROI:</strong> 900% 이상 (15억 투자로 135억 창출)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <h4 class="text-lg font-bold text-blue-800 mb-3">주요 성공 요인</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li>• 단계적 확장으로 리스크 최소화</li>
+                                <li>• 데이터 기반 의사결정 체계</li>
+                                <li>• 지속적 품질 관리</li>
+                                <li>• 다양한 이해관계자와의 협력</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 실행 체계 섹션 -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    실행 체계 및 조치사항
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    체계적인 추진 조직과 필요한 제도적 기반 마련
+                </p>
+            </div>
+
+            <!-- 탭 네비게이션 -->
+            <div class="flex flex-wrap justify-center mb-8 space-x-2">
+                <button class="tab-button active px-6 py-3 rounded-lg font-semibold transition-all" data-tab="organization">
+                    추진 조직
+                </button>
+                <button class="tab-button px-6 py-3 rounded-lg font-semibold transition-all" data-tab="regulations">
+                    관련규정 개정
+                </button>
+                <button class="tab-button px-6 py-3 rounded-lg font-semibold transition-all" data-tab="process">
+                    업무프로세스
+                </button>
+                <button class="tab-button px-6 py-3 rounded-lg font-semibold transition-all" data-tab="cooperation">
+                    관련기관 협의
+                </button>
+            </div>
+
+            <!-- 탭 콘텐츠 -->
+            <div id="organization" class="tab-content active">
+                <div class="bg-white rounded-3xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">
+                        목포 커넥트 통합 추진체계
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-crown text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-mokpo-navy mb-3">추진위원회</h4>
+                            <p class="text-gray-600 text-sm mb-4">
+                                위원장: 부시장<br>
+                                구성: 관련 부서장, 외부 전문가<br>
+                                역할: 주요 정책 결정
+                            </p>
+                            <ul class="text-xs text-gray-500 space-y-1">
+                                <li>• 기획예산과장</li>
+                                <li>• 청년정책과장</li>
+                                <li>• 관광진흥과장</li>
+                                <li>• 정보통신과장</li>
+                                <li>• 외부 전문가 5명</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cogs text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-mokpo-navy mb-3">사업단</h4>
+                            <p class="text-gray-600 text-sm mb-4">
+                                단장: 기획예산과장<br>
+                                구성: 6명 (팀장 1명, 팀원 5명)<br>
+                                역할: 사업 총괄 운영
+                            </p>
+                            <ul class="text-xs text-gray-500 space-y-1">
+                                <li>• 플랫폼 개발팀</li>
+                                <li>• 크리에이터 육성팀</li>
+                                <li>• 마케팅팀</li>
+                                <li>• 운영관리팀</li>
+                                <li>• 데이터분석팀</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-mokpo-navy mb-3">자문단</h4>
+                            <p class="text-gray-600 text-sm mb-4">
+                                구성: 청년 20명, 전문가 10명<br>
+                                역할: 정책 자문 및 피드백<br>
+                                활동: 월 1회 정기 회의
+                            </p>
+                            <ul class="text-xs text-gray-500 space-y-1">
+                                <li>• 청년자문단 (20명)</li>
+                                <li>• 기술 전문가 (5명)</li>
+                                <li>• 관광 전문가 (3명)</li>
+                                <li>• 창업 전문가 (2명)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-blue-50 rounded-lg p-6">
+                        <h4 class="text-lg font-bold text-blue-800 mb-3">
+                            <i class="fas fa-calendar-alt mr-2"></i>운영 체계
+                        </h4>
+                        <div class="grid md:grid-cols-2 gap-6 text-sm">
+                            <div>
+                                <h5 class="font-semibold mb-2">정기 회의</h5>
+                                <ul class="space-y-1 text-gray-700">
+                                    <li>• 추진위원회: 분기별 1회</li>
+                                    <li>• 사업단: 주간 회의</li>
+                                    <li>• 자문단: 월 1회</li>
+                                    <li>• 관련부서 합동: 월 1회</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">보고 체계</h5>
+                                <ul class="space-y-1 text-gray-700">
+                                    <li>• 월간 진행 보고서</li>
+                                    <li>• 분기별 성과 보고</li>
+                                    <li>• 연간 종합 평가</li>
+                                    <li>• 이슈 발생 시 즉시 보고</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="regulations" class="tab-content">
+                <div class="bg-white rounded-3xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">
+                        관련규정 개정 계획
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="border border-blue-200 rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-blue-800 mb-4">
+                                <i class="fas fa-gavel mr-3"></i>목포시 청년 창업 지원 조례 개정
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3">신설 조항</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 플랫폼 기반 창업 지원 근거 마련</li>
+                                        <li>• 디지털 플랫폼 수수료 소득 세제 혜택</li>
+                                        <li>• 크리에이터 인증 제도 운영 근거</li>
+                                        <li>• 창작 공간 임대 지원 규정</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">개정 일정</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 조례안 작성: 2025년 5월</li>
+                                        <li>• 입법예고: 2025년 6월</li>
+                                        <li>• 시의회 제출: 2025년 7월</li>
+                                        <li>• 공포 및 시행: 2025년 8월</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-green-200 rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-green-800 mb-4">
+                                <i class="fas fa-map-marked-alt mr-3"></i>목포시 관광진흥 조례 개정
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3">신설 조항</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 체험형 관광상품 인증 제도</li>
+                                        <li>• 관광플랫폼 운영 지원 근거</li>
+                                        <li>• 지역화폐 연동 관광상품 인센티브</li>
+                                        <li>• 관광상품 품질 관리 규정</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">개정 일정</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 조례안 작성: 2025년 6월</li>
+                                        <li>• 입법예고: 2025년 7월</li>
+                                        <li>• 시의회 제출: 2025년 8월</li>
+                                        <li>• 공포 및 시행: 2025년 9월</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <h4 class="text-lg font-bold text-blue-800 mb-3">
+                                <i class="fas fa-info-circle mr-2"></i>법령 정비 추진 방향
+                            </h4>
+                            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                                <div>
+                                    <h5 class="font-semibold mb-2">기본 원칙</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 기존 법령과의 조화</li>
+                                        <li>• 미래 지향적 규정</li>
+                                        <li>• 실행 가능성 확보</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">절차</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 전문가 자문</li>
+                                        <li>• 관련부서 협의</li>
+                                        <li>• 시민 의견수렴</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">사후 관리</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 시행령 제정</li>
+                                        <li>• 가이드라인 마련</li>
+                                        <li>• 정기적 점검</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="process" class="tab-content">
+                <div class="bg-white rounded-3xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">
+                        업무프로세스 조정 계획
+                    </h3>
+                    
+                    <div class="space-y-8">
+                        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6">
+                            <h4 class="text-xl font-bold text-blue-800 mb-4">
+                                <i class="fas fa-sitemap mr-3"></i>통합 추진체계 구축
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3">주관부서: 기획예산과</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 사업 총괄 기획 및 조정</li>
+                                        <li>• 예산 편성 및 집행 관리</li>
+                                        <li>• 성과 모니터링 및 평가</li>
+                                        <li>• 대외 협력 업무 총괄</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">협력부서 역할 분담</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• <strong>청년정책과:</strong> 크리에이터 육성</li>
+                                        <li>• <strong>관광진흥과:</strong> 관광상품 개발</li>
+                                        <li>• <strong>정보통신과:</strong> 플랫폼 기술 개발</li>
+                                        <li>• <strong>경제재생과:</strong> 지역경제 연계</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-xl p-6">
+                            <h4 class="text-xl font-bold text-green-800 mb-4">
+                                <i class="fas fa-handshake mr-3"></i>민관 협력체계 강화
+                            </h4>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3">운영위원회</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 위원장: 부시장</li>
+                                        <li>• 정부위원: 8명</li>
+                                        <li>• 민간위원: 12명</li>
+                                        <li>• 분기별 정기회의</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">청년자문단</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 목포 거주 청년 20명</li>
+                                        <li>• 임기: 2년</li>
+                                        <li>• 정책 자문 및 모니터링</li>
+                                        <li>• 월 1회 정기회의</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">상생협의체</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 관광업계 대표 10명</li>
+                                        <li>• 임기: 2년</li>
+                                        <li>• 상생 방안 협의</li>
+                                        <li>• 격월 정기회의</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6">
+                            <h4 class="text-xl font-bold text-purple-800 mb-4">
+                                <i class="fas fa-clipboard-check mr-3"></i>업무 프로세스 최적화
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3">의사결정 체계</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 일반 업무: 사업단 단장 결재</li>
+                                        <li>• 중요 사항: 추진위원회 심의</li>
+                                        <li>• 정책 변경: 시장 최종 결정</li>
+                                        <li>• 긴급 사항: 즉시 보고 체계</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">성과 관리 체계</h5>
+                                    <ul class="space-y-2 text-sm text-gray-700">
+                                        <li>• 월간 실적 보고</li>
+                                        <li>• 분기별 성과 평가</li>
+                                        <li>• 연간 종합 평가</li>
+                                        <li>• KPI 기반 성과 측정</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cooperation" class="tab-content">
+                <div class="bg-white rounded-3xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">
+                        관련기관 협의 계획
+                    </h3>
+                    
+                    <div class="space-y-8">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-blue-50 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-blue-800 mb-4">
+                                    <i class="fas fa-graduation-cap mr-3"></i>교육기관 협력
+                                </h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h5 class="font-semibold text-blue-700 mb-2">목포대학교</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 청년인턴십 프로그램 운영</li>
+                                            <li>• 기술 연구개발 협력</li>
+                                            <li>• 창업 교육과정 연계</li>
+                                            <li>• 학생 창업동아리 지원</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-blue-700 mb-2">목포해양대학교</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 해양 체험 프로그램 공동 개발</li>
+                                            <li>• 해양관광 전문인력 양성</li>
+                                            <li>• 선박 운항 안전 교육</li>
+                                            <li>• 해양 시설 활용 협약</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-blue-700 mb-2">전남도립대학교</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 관광서비스 교육과정 연계</li>
+                                            <li>• 실무 인턴십 프로그램</li>
+                                            <li>• 지역 특화 교육과정 개발</li>
+                                            <li>• 평생교육 프로그램 연계</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-green-50 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-green-800 mb-4">
+                                    <i class="fas fa-building mr-3"></i>지역기관 파트너십
+                                </h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h5 class="font-semibold text-green-700 mb-2">목포문화재단</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 문화 콘텐츠 개발 및 운영 지원</li>
+                                            <li>• 예술가 네트워크 연계</li>
+                                            <li>• 문화시설 활용 협약</li>
+                                            <li>• 문화 마케팅 협력</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-green-700 mb-2">목포상공회의소</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 지역기업 파트너십 중재</li>
+                                            <li>• 청년 창업 멘토링 연계</li>
+                                            <li>• 비즈니스 네트워킹 지원</li>
+                                            <li>• 투자 유치 지원</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-green-700 mb-2">목포관광협의회</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 기존 관광업계와의 상생 방안</li>
+                                            <li>• 관광상품 패키지 개발</li>
+                                            <li>• 공동 마케팅 협력</li>
+                                            <li>• 품질 관리 체계 구축</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-green-700 mb-2">목포시관광공사</h5>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 마케팅 및 홍보 협력</li>
+                                            <li>• 관광객 유치 전략 공유</li>
+                                            <li>• 해외 마케팅 협력</li>
+                                            <li>• 관광 통계 데이터 공유</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 rounded-xl p-6">
+                            <h4 class="text-xl font-bold text-purple-800 mb-4">
+                                <i class="fas fa-landmark mr-3"></i>중앙정부 및 유관기관
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold text-purple-700 mb-3">정부기관</h5>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <h6 class="font-semibold text-sm">한국관광공사</h6>
+                                            <ul class="text-xs text-gray-600 mt-1 space-y-1">
+                                                <li>• 관광상품 개발 지원</li>
+                                                <li>• 해외마케팅 지원</li>
+                                                <li>• 관광 트렌드 정보 공유</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h6 class="font-semibold text-sm">중소벤처기업진흥공단</h6>
+                                            <ul class="text-xs text-gray-600 mt-1 space-y-1">
+                                                <li>• 청년창업 지원 프로그램 연계</li>
+                                                <li>• 창업 자금 지원</li>
+                                                <li>• 멘토링 프로그램 연계</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-purple-700 mb-3">진흥기관</h5>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <h6 class="font-semibold text-sm">한국콘텐츠진흥원</h6>
+                                            <ul class="text-xs text-gray-600 mt-1 space-y-1">
+                                                <li>• 문화관광 콘텐츠 개발 지원</li>
+                                                <li>• 디지털 콘텐츠 기술 지원</li>
+                                                <li>• 해외 진출 지원</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h6 class="font-semibold text-sm">한국IT진흥원</h6>
+                                            <ul class="text-xs text-gray-600 mt-1 space-y-1">
+                                                <li>• 플랫폼 기술 개발 지원</li>
+                                                <li>• AI/블록체인 기술 지원</li>
+                                                <li>• 디지털 전환 컨설팅</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 rounded-lg p-6">
+                            <h4 class="text-lg font-bold text-orange-800 mb-3">
+                                <i class="fas fa-calendar-check mr-2"></i>협의 추진 일정
+                            </h4>
+                            <div class="grid md:grid-cols-4 gap-4 text-sm">
+                                <div>
+                                    <h5 class="font-semibold mb-2">2025년 5월</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 교육기관 MOU 체결</li>
+                                        <li>• 기본 협약서 작성</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">2025년 6월</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 지역기관 협의</li>
+                                        <li>• 세부 협력 방안 논의</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">2025년 7월</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 중앙정부 협의</li>
+                                        <li>• 예산 지원 협의</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">2025년 8월</h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• 최종 협약 체결</li>
+                                        <li>• 실행 체계 구축</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 리스크 관리 섹션 -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    리스크 관리 전략
+                </h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    체계적인 리스크 분석과 예방 중심의 관리 전략
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-red-900 bg-opacity-20 rounded-xl p-8 card-hover">
+                    <h4 class="text-xl font-bold mb-4 text-red-300">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        기술적 리스크
+                    </h4>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <h5 class="font-semibold text-red-200 mb-2">예상 문제</h5>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• 플랫폼 기술 오류</li>
+                                <li>• AI 추천 정확도 저하</li>
+                                <li>• 보안 및 개인정보 유출</li>
+                                <li>• 시스템 과부하</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-red-200 mb-2">대응 방안</h5>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• 단계적 베타 테스트</li>
+                                <li>• 백업 시스템 구축</li>
+                                <li>• 지속적 업데이트</li>
+                                <li>• 전문가 자문단 운영</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-900 bg-opacity-20 rounded-xl p-8 card-hover">
+                    <h4 class="text-xl font-bold mb-4 text-yellow-300">
+                        <i class="fas fa-users mr-2"></i>
+                        운영적 리스크
+                    </h4>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <h5 class="font-semibold text-yellow-200 mb-2">예상 문제</h5>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• 크리에이터 이탈</li>
+                                <li>• 서비스 품질 편차</li>
+                                <li>• 고객 불만 증가</li>
+                                <li>• 운영 인력 부족</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-yellow-200 mb-2">대응 방안</h5>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• 인센티브 체계 운영</li>
+                                <li>• 지속적 교육</li>
+                                <li>• 품질 관리 시스템</li>
+                                <li>• 단계적 인력 충원</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900 bg-opacity-20 rounded-xl p-8 card-hover">
+                    <h4 class="text-xl font-bold mb-4 text-blue-300">
+                        <i class="fas fa-chart-line-down mr-2"></i>
+                        시장 리스크
+                    </h4>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <h5 class="font-semibold text-blue-200 mb-2">예상 문제</h5>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• 경쟁자 출현</li>
+                                <li>• 관광객 감소</li>
+                                <li>• 경제 침체</li>
+                                <li>• 정책 변화</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-blue-200 mb-2">대응 방안</h5>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• 차별화 전략</li>
+                                <li>• 다원화된 마케팅</li>
+                                <li>• 유연한 사업 모델</li>
+                                <li>• 정책 모니터링</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 리스크 관리 체계 -->
+            <div class="bg-white bg-opacity-10 rounded-xl p-8">
+                <h3 class="text-2xl font-bold text-center mb-8">
+                    통합 리스크 관리 체계
+                </h3>
+                <div class="grid md:grid-cols-4 gap-6 text-sm">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-search text-white"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">위험 식별</h4>
+                        <p class="text-gray-300">정기적 리스크 평가와 새로운 위험 요소 모니터링</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-chart-bar text-white"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">위험 평가</h4>
+                        <p class="text-gray-300">발생 가능성과 영향도 기반 정량적 위험 평가</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">위험 대응</h4>
+                        <p class="text-gray-300">사전 예방과 사후 대응 계획 수립 및 실행</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-sync text-white"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">지속 개선</h4>
+                        <p class="text-gray-300">정기적 점검과 개선을 통한 리스크 관리 고도화</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성과 관리 및 모니터링 섹션 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    성과 관리 및 모니터링
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    명확한 KPI와 체계적인 모니터링으로 성공을 측정하고 개선합니다
+                </p>
+            </div>
+
+            <!-- 핵심 KPI -->
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 mb-16">
+                <h3 class="text-3xl font-bold text-center text-mokpo-navy mb-8">
+                    핵심 성과 지표 (KPI)
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-mokpo-navy mb-2">크리에이터 수</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>1년차:</span>
+                                <span class="font-semibold">100명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>2년차:</span>
+                                <span class="font-semibold">300명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>3년차:</span>
+                                <span class="font-semibold">500명</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calendar-check text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-mokpo-navy mb-2">예약 건수</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>1년차:</span>
+                                <span class="font-semibold">1만건</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>2년차:</span>
+                                <span class="font-semibold">5만건</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>3년차:</span>
+                                <span class="font-semibold">10만건</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-smile text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-mokpo-navy mb-2">만족도</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>1년차:</span>
+                                <span class="font-semibold">4.0/5.0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>2년차:</span>
+                                <span class="font-semibold">4.5/5.0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>3년차:</span>
+                                <span class="font-semibold">4.8/5.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-won-sign text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-mokpo-navy mb-2">지역 소비</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>1년차:</span>
+                                <span class="font-semibold">5억원</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>2년차:</span>
+                                <span class="font-semibold">15억원</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>3년차:</span>
+                                <span class="font-semibold">30억원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 모니터링 체계 -->
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6">
+                        <i class="fas fa-chart-line mr-3"></i>실시간 모니터링 시스템
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-blue-800 mb-2">대시보드 구성</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• 실시간 예약 현황</li>
+                                <li>• 크리에이터 활동 지표</li>
+                                <li>• 고객 만족도 추이</li>
+                                <li>• 수익 및 비용 분석</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-green-800 mb-2">알림 시스템</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• 목표 달성율 90% 미만 시 알림</li>
+                                <li>• 서비스 오류 즉시 알림</li>
+                                <li>• 고객 불만 3.5점 미만 시 알림</li>
+                                <li>• 주요 지표 급변 시 알림</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6">
+                        <i class="fas fa-clipboard-list mr-3"></i>정기 평가 체계
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-purple-800 mb-2">평가 주기</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <strong>일일:</strong> 주요 운영 지표 점검</li>
+                                <li>• <strong>주간:</strong> 성과 트렌드 분석</li>
+                                <li>• <strong>월간:</strong> 종합 성과 평가</li>
+                                <li>• <strong>분기:</strong> 전략 수정 및 보완</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-orange-800 mb-2">개선 프로세스</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• 문제점 식별 및 원인 분석</li>
+                                <li>• 개선 방안 도출 및 검토</li>
+                                <li>• 실행 계획 수립 및 승인</li>
+                                <li>• 개선 효과 측정 및 평가</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 성과 관리 프로세스 -->
+            <div class="bg-gray-50 rounded-3xl p-8">
+                <h3 class="text-3xl font-bold text-center text-mokpo-navy mb-8">
+                    성과 관리 프로세스
+                </h3>
+                <div class="grid md:grid-cols-5 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                            <span class="text-white text-xl font-bold">1</span>
+                        </div>
+                        <h4 class="font-semibold text-mokpo-navy mb-2">계획 수립</h4>
+                        <p class="text-sm text-gray-600">목표 설정 및 KPI 정의</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                            <span class="text-white text-xl font-bold">2</span>
+                        </div>
+                        <h4 class="font-semibold text-mokpo-navy mb-2">실행 및 추적</h4>
+                        <p class="text-sm text-gray-600">실시간 모니터링 및 데이터 수집</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                            <span class="text-white text-xl font-bold">3</span>
+                        </div>
+                        <h4 class="font-semibold text-mokpo-navy mb-2">분석 및 평가</h4>
+                        <p class="text-sm text-gray-600">성과 분석 및 원인 파악</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                            <span class="text-white text-xl font-bold">4</span>
+                        </div>
+                        <h4 class="font-semibold text-mokpo-navy mb-2">개선 방안</h4>
+                        <p class="text-sm text-gray-600">문제점 해결 및 개선 실행</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                            <span class="text-white text-xl font-bold">5</span>
+                        </div>
+                        <h4 class="font-semibold text-mokpo-navy mb-2">피드백 반영</h4>
+                        <p class="text-sm text-gray-600">다음 주기 계획에 적용</p>
+                    </div>
+                </div>
+                
+                <!-- 연결선 (데스크톱에서만 표시) -->
+                <div class="hidden md:block relative mt-8">
+                    <div class="absolute top-0 left-0 w-full flex justify-between px-8">
+                        <div class="flex-1 h-0.5 bg-gradient-to-r from-blue-500 to-green-500 mt-8"></div>
+                        <div class="flex-1 h-0.5 bg-gradient-to-r from-green-500 to-purple-500 mt-8"></div>
+                        <div class="flex-1 h-0.5 bg-gradient-to-r from-purple-500 to-orange-500 mt-8"></div>
+                        <div class="flex-1 h-0.5 bg-gradient-to-r from-orange-500 to-cyan-500 mt-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA 섹션 -->
+    <section class="py-20 bg-gradient-to-br from-mokpo-navy to-mokpo-blue text-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                체계적인 추진으로 확실한 성공을
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                목포 커넥트는 단계별 추진 계획과 체계적인 관리 체계로<br>
+                성공적인 구현을 보장합니다. 지금 바로 시작해보세요.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="solution.html" class="bg-white text-mokpo-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 inline-block">
+                    <i class="fas fa-lightbulb mr-2"></i>
+                    솔루션 자세히 보기
+                </a>
+                <a href="benefits.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-all duration-300 inline-block">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    기대효과 확인하기
+                </a>
+                <button class="bg-mokpo-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300">
+                    <i class="fas fa-phone mr-2"></i>
+                    지금 문의하기
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">목포 커넥트</h3>
+                    <p class="text-gray-400 mb-4">청년이 만드는 목포, 관광객이 발견하는 목포</p>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-facebook text-2xl hover:text-blue-500 cursor-pointer transition-colors"></i>
+                        <i class="fab fa-instagram text-2xl hover:text-pink-500 cursor-pointer transition-colors"></i>
+                        <i class="fab fa-youtube text-2xl hover:text-red-500 cursor-pointer transition-colors"></i>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">바로가기</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">홈</a></li>
+                        <li><a href="problems.html" class="text-gray-400 hover:text-white transition-colors">현황분석</a></li>
+                        <li><a href="solution.html" class="text-gray-400 hover:text-white transition-colors">솔루션</a></li>
+                        <li><a href="programs.html" class="text-gray-400 hover:text-white transition-colors">체험프로그램</a></li>
+                        <li><a href="benefits.html" class="text-gray-400 hover:text-white transition-colors">기대효과</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">분석자료</h4>
+                    <ul class="space-y-2">
+                        <li><a href="trend-analysis.html" class="text-gray-400 hover:text-white transition-colors">트렌드 분석</a></li>
+                        <li><a href="youth-statistics.html" class="text-gray-400 hover:text-white transition-colors">청년 현황</a></li>
+                        <li><a href="benchmarking.html" class="text-gray-400 hover:text-white transition-colors">벤치마킹</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 목포 커넥트. 2025년 목포시 시정발전 정책제안 공모전 출품작
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // 추진방안 페이지 전용 JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // 차트 초기화
+            initializeCharts();
+            
+            // 탭 기능 초기화
+            initializeTabs();
+            
+            // 스크롤 애니메이션 초기화
+            initializeScrollAnimations();
+            
+            // 스크롤 함수들
+            window.scrollToRoadmap = function() {
+                document.getElementById('roadmap').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            };
+            
+            window.scrollToBudget = function() {
+                document.getElementById('budget').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            };
+        });
+
+        // 차트 초기화 함수
+        function initializeCharts() {
+            // 예산 도넛 차트
+            const budgetCtx = document.getElementById('budgetChart');
+            if (budgetCtx) {
+                new Chart(budgetCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['국비 (50%)', '시비 (30%)', '민간투자 (20%)'],
+                        datasets: [{
+                            data: [7.5, 4.5, 3],
+                            backgroundColor: [
+                                '#2563eb',
+                                '#0891b2', 
+                                '#ea580c'
+                            ],
+                            borderWidth: 0,
+                            cutout: '70%'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20,
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '억원';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 성과 예측 라인 차트
+            const performanceCtx = document.getElementById('performanceChart');
+            if (performanceCtx) {
+                new Chart(performanceCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1년차', '2년차', '3년차'],
+                        datasets: [{
+                            label: '크리에이터 수',
+                            data: [100, 300, 500],
+                            borderColor: '#2563eb',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            yAxisID: 'y',
+                            tension: 0.3,
+                            pointRadius: 6,
+                            pointHoverRadius: 8
+                        }, {
+                            label: '연간 예약 건수',
+                            data: [10000, 50000, 100000],
+                            borderColor: '#0891b2',
+                            backgroundColor: 'rgba(8, 145, 178, 0.1)',
+                            yAxisID: 'y1',
+                            tension: 0.3,
+                            pointRadius: 6,
+                            pointHoverRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        scales: {
+                            x: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: '사업 연차',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: '크리에이터 수 (명)',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: '예약 건수 (건)',
+                                    font: {
+                                        size: 12
+                                    }
+                                },
+                                grid: {
+                                    drawOnChartArea: false,
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString();
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label + ': ';
+                                        if (context.datasetIndex === 0) {
+                                            label += context.parsed.y + '명';
+                                        } else {
+                                            label += context.parsed.y.toLocaleString() + '건';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 탭 기능 초기화
+        function initializeTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    
+                    // 모든 탭 버튼 비활성화
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                        btn.classList.remove('bg-mokpo-blue', 'text-white');
+                    });
+                    
+                    // 클릭된 탭 버튼 활성화
+                    this.classList.add('active');
+                    this.classList.remove('bg-gray-200', 'text-gray-700');
+                    this.classList.add('bg-mokpo-blue', 'text-white');
+                    
+                    // 모든 탭 컨텐츠 숨기기
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    });
+                    
+                    // 타겟 탭 컨텐츠 보이기
+                    const targetContent = document.getElementById(targetTab);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        targetContent.style.display = 'block';
+                        
+                        // 애니메이션 효과
+                        targetContent.style.opacity = '0';
+                        setTimeout(() => {
+                            targetContent.style.opacity = '1';
+                            targetContent.style.transition = 'opacity 0.3s ease-in-out';
+                        }, 50);
+                    }
+                });
+            });
+        }
+
+        // 스크롤 애니메이션 초기화
+        function initializeScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slide-up');
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, observerOptions);
+
+            // 모든 카드와 섹션에 observer 적용
+            document.querySelectorAll('.card-hover, .milestone-item, .bg-white, .bg-gradient-to-br').forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+
+            // 순차적 애니메이션을 위한 지연 처리
+            document.querySelectorAll('.delay-100, .delay-200, .delay-300, .delay-400, .delay-500').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // 부드러운 스크롤 기능 강화
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 네비게이션 스크롤 효과
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow-xl');
+            } else {
+                navbar.classList.remove('shadow-xl');
+            }
+        });
+
+        // 프로그래스 인디케이터 (선택사항)
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollHeight) * 100;
+            
+            // 프로그래스 바가 있다면 업데이트
+            const progressBar = document.querySelector('.progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+        });
+    </script>
+</body>
+</html>
+
+}

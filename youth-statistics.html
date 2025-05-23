@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목포시 청년 현황 통계 - 목포 커넥트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mokpo-blue': '#2563eb',
+                        'mokpo-navy': '#1e3a8a',
+                        'mokpo-cyan': '#0891b2',
+                        'mokpo-orange': '#ea580c',
+                        'mokpo-yellow': '#fbbf24'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-mokpo-navy">목포 커넥트</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">홈</a>
+                        <a href="trend-analysis.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">트렌드 분석</a>
+                        <a href="#youth-stats" class="text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">청년 현황</a>
+                        <a href="benchmarking.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">벤치마킹</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="bg-gray-100 p-2 rounded-md">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">홈</a>
+                <a href="trend-analysis.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">트렌드 분석</a>
+                <a href="#youth-stats" class="block px-3 py-2 text-mokpo-blue bg-gray-100 rounded-md">청년 현황</a>
+                <a href="benchmarking.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">벤치마킹</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 헤더 섹션 -->
+    <section class="bg-gradient-to-br from-mokpo-navy to-mokpo-blue text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                    목포시 청년 현황 통계 분석
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    데이터가 말하는 목포 청년의 현재와 미래
+                </p>
+                <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">216,939명</div>
+                        <div class="text-sm opacity-90">목포시 전체 인구</div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">52,728명</div>
+                        <div class="text-sm opacity-90">청년인구 (18-39세)</div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">24.3%</div>
+                        <div class="text-sm opacity-90">청년 인구 비율</div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">-6,238명</div>
+                        <div class="text-sm opacity-90">3년간 청년 감소</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문제 상황 개요 -->
+    <section id="youth-stats" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">목포 청년, 무엇이 문제인가?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    먼저 핵심 문제를 파악해보겠습니다. 아래 알림판(Dashboard)은 목포시가 직면한 
+                    청년 관련 주요 지표들을 한눈에 보여줍니다.
+                </p>
+            </div>
+
+            <!-- 위기 지표 대시보드 -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- 인구 감소 -->
+                <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users-slash text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-red-700 mb-2">심각한 청년 유출</h3>
+                        <div class="text-3xl font-bold text-red-600 mb-2">-6,238명</div>
+                        <p class="text-sm text-gray-600">최근 3년간 청년인구 감소</p>
+                        <div class="mt-4 p-3 bg-red-100 rounded-lg">
+                            <p class="text-xs text-red-800">
+                                이는 목포시 전체 청년의 약 9%에 해당하는 수치로, 
+                                지역 활력 저하의 직접적 원인이 되고 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 고용 문제 -->
+                <div class="bg-orange-50 border-2 border-orange-200 rounded-xl p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-briefcase-slash text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-orange-700 mb-2">고용률 전남 최하위</h3>
+                        <div class="text-3xl font-bold text-orange-600 mb-2">60.2%</div>
+                        <p class="text-sm text-gray-600">2023년 상반기 기준</p>
+                        <div class="mt-4 p-3 bg-orange-100 rounded-lg">
+                            <p class="text-xs text-orange-800">
+                                전라남도 22개 시군 중 가장 낮은 고용률을 기록하며, 
+                                실업률은 2.7%로 가장 높은 수준입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 창업 생태계 -->
+                <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-store-slash text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-yellow-700 mb-2">창업 생태계 미흡</h3>
+                        <div class="text-3xl font-bold text-yellow-600 mb-2">15.6%</div>
+                        <p class="text-sm text-gray-600">전체 등록사업체 중 청년 비율</p>
+                        <div class="mt-4 p-3 bg-yellow-100 rounded-lg">
+                            <p class="text-xs text-yellow-800">
+                                6,778개의 청년 등록사업체는 지역 경제 활성화에 
+                                충분하지 않은 수준으로 평가됩니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 문제의 심각성 설명 -->
+            <div class="bg-gray-50 rounded-xl p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">
+                    이 숫자들이 의미하는 것
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">단순한 통계를 넘어서</h4>
+                        <p class="text-gray-700 mb-4">
+                            위의 수치들은 단순한 통계가 아닙니다. 이는 목포시가 직면한 
+                            구조적 문제의 표면적 징후들입니다. 청년들이 떠나는 이유를 
+                            이해하려면 이 숫자들 뒤에 숨겨진 생활의 어려움을 
+                            파악해야 합니다.
+                        </p>
+                        <p class="text-gray-700">
+                            예를 들어, 고용률 60.2%라는 수치는 100명의 청년 중 40명이 
+                            일자리를 구하지 못하고 있다는 의미입니다. 이들 중 상당수는 
+                            더 나은 기회를 찾아 타 지역으로 이주하게 됩니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">연쇄반응의 시작</h4>
+                        <p class="text-gray-700 mb-4">
+                            청년 유출은 지역경제의 악순환을 만듭니다. 청년들이 떠나면 
+                            소비가 줄어들고, 이는 다시 일자리 감소로 이어집니다. 
+                            창업 생태계도 위축되며, 혁신과 활력이 감소합니다.
+                        </p>
+                        <p class="text-gray-700">
+                            이런 악순환을 끊기 위해서는 단순한 일자리 창출을 넘어선 
+                            종합적이고 혁신적인 접근이 필요합니다. 바로 이것이 
+                            '목포 커넥트' 프로젝트의 출발점입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 인구 현황 상세 분석 -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">인구 현황 깊이 들여다보기</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    목포시의 청년 인구 구조를 자세히 분석해보면서, 각 데이터가 
+                    어떤 의미를 갖는지 단계별로 살펴보겠습니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- 인구 구성 차트 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">목포시 인구 구성 (2023년)</h3>
+                    <div class="relative h-80 mb-6">
+                        <canvas id="populationChart"></canvas>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">전체 인구</span>
+                            <span class="font-bold text-mokpo-navy">216,939명</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">청년 인구 (18-39세)</span>
+                            <span class="font-bold text-blue-600">52,728명</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">청년 비율</span>
+                            <span class="font-bold text-green-600">24.3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3년간 변화 추이 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">청년 인구 변화 추이</h3>
+                    <div class="relative h-80 mb-6">
+                        <canvas id="youthTrendChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="bg-blue-50 rounded-lg p-3">
+                            <div class="text-lg font-bold text-blue-600">73,698명</div>
+                            <div class="text-sm text-gray-600">2022년</div>
+                        </div>
+                        <div class="bg-yellow-50 rounded-lg p-3">
+                            <div class="text-lg font-bold text-yellow-600">70,579명</div>
+                            <div class="text-sm text-gray-600">2023년 (추정)</div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-3">
+                            <div class="text-lg font-bold text-red-600">67,460명</div>
+                            <div class="text-sm text-gray-600">2024년</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 인구 분석 인사이트 -->
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-6">이 데이터가 의미하는 것</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-gray-800">24.3%라는 청년 비율의 의미</h4>
+                        <p class="text-gray-700">
+                            전체 인구의 4분의 1이 청년층이라는 것은 상당히 높은 비율처럼 보일 수 있습니다. 
+                            하지만 전국 평균(약 27%)보다 낮으며, 더 중요한 것은 이 비율이 지속적으로 
+                            감소하고 있다는 점입니다.
+                        </p>
+                        <p class="text-gray-700">
+                            현재의 감소 추세가 계속된다면, 2030년까지 청년 비율이 20% 이하로 
+                            떨어질 가능성이 높습니다. 이는 지역사회의 활력 저하와 직결됩니다.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-gray-800">3년간 6,238명 감소의 충격</h4>
+                        <p class="text-gray-700">
+                            단순히 숫자로 보면 6,238명이지만, 이를 다르게 표현하면 매일 약 5.7명의 
+                            청년이 목포를 떠나고 있다는 계산입니다. 이는 한 학급(30명) 규모의 
+                            청년들이 6일마다 목포를 떠나는 것과 같습니다.
+                        </p>
+                        <p class="text-gray-700">
+                            특히 2023년 상반기에만 1,900명이 감소했다는 점은 청년 유출이 
+                            가속화되고 있음을 보여줍니다. 이 같은 추세는 시급한 대응이 필요함을 의미합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 혼인 및 가구 현황 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">청년들의 생활 패턴 분석</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    청년들이 어떻게 살고 있는지, 그들의 선택이 무엇을 의미하는지 
+                    혼인과 가구 현황을 통해 살펴보겠습니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- 혼인 현황 -->
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">혼인 현황</h3>
+                    <div class="relative h-64 mb-6">
+                        <canvas id="marriageChart"></canvas>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>미혼 청년</span>
+                            <span class="font-bold">63.5%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>기혼 청년</span>
+                            <span class="font-bold">34.0%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>기타</span>
+                            <span class="font-bold">2.5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 가구 현황 -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">가구 구성</h3>
+                    <div class="space-y-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">17,061가구</div>
+                            <p class="text-sm text-gray-600">청년 일반가구 (전체의 17.8%)</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">8,638가구</div>
+                            <p class="text-sm text-gray-600">청년 1인가구 (전체 1인가구의 24.6%)</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">주목할 점</h4>
+                            <p class="text-xs text-gray-700">
+                                청년 가구의 절반 이상(50.6%)이 1인가구로, 
+                                이는 전국 평균보다 높은 수치입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 혼인율 분석 -->
+                <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">혼인율 분석</h3>
+                    <div class="space-y-6">
+                        <div class="text-center">
+                            <h4 class="font-semibold mb-3">조혼인율 (1천명당)</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-100 rounded-lg p-3">
+                                    <div class="text-lg font-bold text-blue-600">17.1건</div>
+                                    <div class="text-xs text-gray-600">남편</div>
+                                </div>
+                                <div class="bg-pink-100 rounded-lg p-3">
+                                    <div class="text-lg font-bold text-pink-600">21.5건</div>
+                                    <div class="text-xs text-gray-600">아내</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">2,541쌍</h4>
+                            <p class="text-xs text-gray-700 mb-2">신혼부부 (초혼 88.4%, 재혼 11.4%)</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 88.4%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 생활 패턴 인사이트 -->
+            <div class="mt-12 bg-gray-50 rounded-xl p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">생활 패턴이 말하는 것</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg p-6">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">높은 미혼율의 의미</h4>
+                        <p class="text-gray-700 text-sm">
+                            63.5%의 미혼율은 전국 평균과 비슷하지만, 지역의 특성상 결혼 후 
+                            타 지역으로 이주하는 경우가 많아 실질적인 정착률은 더 낮을 것으로 예상됩니다. 
+                            이는 경제적 안정성에 대한 우려와 관련이 있습니다.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg p-6">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">1인가구 증가의 신호</h4>
+                        <p class="text-gray-700 text-sm">
+                            청년 1인가구가 전체 청년 가구의 절반을 차지한다는 것은 전통적인 
+                            가족 형태의 변화를 의미합니다. 이는 개인화 트렌드와 함께 
+                            맞춤형 주거 및 생활 서비스에 대한 새로운 수요를 창출합니다.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg p-6">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">정책적 시사점</h4>
+                        <p class="text-gray-700 text-sm">
+                            이러한 생활 패턴의 변화는 정책 설계에 중요한 통찰을 제공합니다. 
+                            단순한 일자리 창출을 넘어서 청년들의 다양한 라이프스타일을 
+                            고려한 종합적인 접근이 필요합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 경제 현황 -->
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">청년 경제 현황의 실상</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    청년들의 경제적 상황을 소득, 소비, 자산 측면에서 종합적으로 분석해보겠습니다. 
+                    이 데이터들이 보여주는 것은 단순한 숫자 이상의 청년들의 현실입니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- 소득 현황 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">월평균 가구소득 분포</h3>
+                    <div class="relative h-80 mb-6">
+                        <canvas id="incomeChart"></canvas>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">최다 구간</span>
+                            <span class="font-bold text-green-600">200-300만원 (30.0%)</span>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-3">
+                            <p class="text-sm text-gray-700">
+                                <strong>해석:</strong> 청년 가구의 30%가 월 200-300만원 구간에 
+                                집중되어 있어, 중간 소득층이 주를 이루지만 여전히 경제적 
+                                여유는 부족한 상황으로 보입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 소비 현황 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">월평균 소비 패턴</h3>
+                    <div class="relative h-80 mb-6">
+                        <canvas id="consumptionChart"></canvas>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">최다 구간</span>
+                            <span class="font-bold text-blue-600">100-200만원 (31.8%)</span>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-3">
+                            <p class="text-sm text-gray-700">
+                                <strong>의미:</strong> 소득 대비 소비가 합리적 수준을 유지하고 있으나, 
+                                저축이나 투자여력은 제한적일 것으로 추정됩니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 주택 소유 현황 -->
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-8 text-center">자산 형성 현황</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-home text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-mokpo-navy mb-2">주택 소유</h4>
+                        <div class="text-3xl font-bold text-orange-600 mb-2">7,975명</div>
+                        <p class="text-sm text-gray-600 mb-4">전체 청년의 15.1%</p>
+                        <div class="bg-orange-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-700">
+                                청년 10명 중 1.5명만이 주택을 소유하고 있어, 
+                                자산 형성의 어려움을 보여줍니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-pie text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-mokpo-navy mb-2">소득-소비 비율</h4>
+                        <div class="text-3xl font-bold text-purple-600 mb-2">약 70%</div>
+                        <p class="text-sm text-gray-600 mb-4">소득 대비 소비 비율</p>
+                        <div class="bg-purple-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-700">
+                                건전한 소비 패턴을 보이지만, 저축 여력이 
+                                제한적임을 의미합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-arrow-trend-down text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-mokpo-navy mb-2">경제적 부담</h4>
+                        <div class="text-3xl font-bold text-red-600 mb-2">높음</div>
+                        <p class="text-sm text-gray-600 mb-4">주거비, 생활비 부담</p>
+                        <div class="bg-red-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-700">
+                                낮은 주택 소유율과 제한적 저축 여력은 
+                                경제적 불안정성을 증가시킵니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 경제 현황 종합 분석 -->
+            <div class="mt-12 bg-mokpo-navy text-white rounded-xl p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">경제 현황이 시사하는 바</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">현재 상황의 특징</h4>
+                        <ul class="space-y-3 text-blue-100">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-circle text-xs mt-2"></i>
+                                <span>중간 소득층 중심의 안정적이지만 여유롭지 않은 경제구조</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-circle text-xs mt-2"></i>
+                                <span>합리적 소비 패턴이지만 자산 형성에는 어려움</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-circle text-xs mt-2"></i>
+                                <span>주택 소유율 15.1%는 전국 평균보다 현저히 낮음</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">정책적 함의</h4>
+                        <ul class="space-y-3 text-blue-100">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-circle text-xs mt-2"></i>
+                                <span>소득 증대와 함께 자산 형성 기회 제공이 필요</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-circle text-xs mt-2"></i>
+                                <span>청년 친화적 주거 정책의 시급성</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-circle text-xs mt-2"></i>
+                                <span>창업과 부업 기회를 통한 추가 소득원 창출</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 고용 현황 분석 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">고용 현황: 가장 시급한 문제</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    청년들이 목포를 떠나는 가장 직접적인 이유인 고용 문제를 면밀히 분석해보겠습니다. 
+                    단순한 취업률을 넘어서 고용의 질적 측면까지 살펴보겠습니다.
+                </p>
+            </div>
+
+            <!-- 주요 고용 지표 -->
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-tie text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-red-700 mb-2">청년 취업자</h3>
+                    <div class="text-2xl font-bold text-red-600 mb-1">30,100명</div>
+                    <p class="text-sm text-gray-600">전체 청년 중 약 57%</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-percentage text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-orange-700 mb-2">고용률</h3>
+                    <div class="text-2xl font-bold text-orange-600 mb-1">59.9%</div>
+                    <p class="text-sm text-gray-600">전남 22개 시군 최하위</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-yellow-700 mb-2">고용보험 가입자</h3>
+                    <div class="text-2xl font-bold text-yellow-600 mb-1">11,960명</div>
+                    <p class="text-sm text-gray-600">취업자의 39.7%</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-door-open text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-blue-700 mb-2">자발적 퇴직</h3>
+                    <div class="text-2xl font-bold text-blue-600 mb-1">5,141명</div>
+                    <p class="text-sm text-gray-600">전체 퇴직의 65%</p>
+                </div>
+            </div>
+
+            <!-- 고용 불안정성 분석 -->
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">고용보험 가입 기간 분석</h3>
+                    <div class="relative h-80 mb-6">
+                        <canvas id="employmentChart"></canvas>
+                    </div>
+                    <div class="bg-yellow-50 rounded-lg p-4">
+                        <h4 class="font-semibold mb-2">주목할 점</h4>
+                        <p class="text-sm text-gray-700">
+                            가입 기간 1년 미만이 38.9%로, 고용 불안정성이 매우 높습니다. 
+                            이는 청년들이 안정적인 직장을 찾기 어려워하고 있음을 의미합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-mokpo-navy mb-6">전남 내 고용률 비교</h3>
+                    <div class="space-y-6">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold text-red-600 mb-2">60.2%</div>
+                            <p class="text-gray-600">목포시 고용률 (22개 시군 중 최하위)</p>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">전남 평균</span>
+                                    <span class="text-sm font-bold">65.4%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="bg-green-500 h-3 rounded-full" style="width: 65.4%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">목포시</span>
+                                    <span class="text-sm font-bold text-red-600">60.2%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="bg-red-500 h-3 rounded-full" style="width: 60.2%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">1위 지역</span>
+                                    <span class="text-sm font-bold text-blue-600">72.1%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div class="bg-blue-500 h-3 rounded-full" style="width: 72.1%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <p class="text-sm text-gray-700">
+                                <strong>차이의 의미:</strong> 전남 평균보다 5.2%p 낮고, 
+                                최고 지역과는 11.9%p 차이가 납니다. 이는 약 3,000-6,000명의 
+                                추가 일자리가 필요함을 의미합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 고용 문제의 구조적 분석 -->
+            <div class="mt-12 bg-gray-50 rounded-xl p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-8 text-center">고용 문제의 근본 원인</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">양적 문제: 일자리 부족</h4>
+                        <div class="space-y-3 text-gray-700">
+                            <p class="flex items-start space-x-2">
+                                <i class="fas fa-dot-circle text-red-500 mt-2 text-xs"></i>
+                                <span>전남 최하위 고용률은 절대적인 일자리 부족을 의미</span>
+                            </p>
+                            <p class="flex items-start space-x-2">
+                                <i class="fas fa-dot-circle text-red-500 mt-2 text-xs"></i>
+                                <span>지역 내 주요 산업의 침체와 신성장동력 부족</span>
+                            </p>
+                            <p class="flex items-start space-x-2">
+                                <i class="fas fa-dot-circle text-red-500 mt-2 text-xs"></i>
+                                <span>청년 친화적 기업의 부족과 기업 유치 미흡</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">질적 문제: 양질의 일자리 부족</h4>
+                        <div class="space-y-3 text-gray-700">
+                            <p class="flex items-start space-x-2">
+                                <i class="fas fa-dot-circle text-orange-500 mt-2 text-xs"></i>
+                                <span>고용보험 가입률 39.7%는 비정규직 일자리가 많음을 시사</span>
+                            </p>
+                            <p class="flex items-start space-x-2">
+                                <i class="fas fa-dot-circle text-orange-500 mt-2 text-xs"></i>
+                                <span>1년 미만 근속자 38.9%는 고용 불안정을 의미</span>
+                            </p>
+                            <p class="flex items-start space-x-2">
+                                <i class="fas fa-dot-circle text-orange-500 mt-2 text-xs"></i>
+                                <span>자발적 퇴직 65%는 직무 만족도나 성장 가능성 부족을 시사</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-white rounded-lg p-6">
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800 text-center">목포 커넥트의 해법</h4>
+                    <p class="text-gray-700 text-center">
+                        이러한 고용 문제의 근본적 해결을 위해 '목포 커넥트'는 단순한 일자리 증가가 아닌, 
+                        <strong>청년들이 직접 만들어가는 새로운 형태의 일자리</strong>를 제안합니다. 
+                        창업과 자영업의 중간 지점에서 안정성과 창의성을 동시에 확보할 수 있는 
+                        플랫폼 기반 경제활동을 통해 고용의 양과 질 문제를 동시에 해결하고자 합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 창업 현황 및 종합 결론 -->
+    <section class="py-16 bg-mokpo-navy text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">창업 생태계와 미래 전망</h2>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                    마지막으로 청년 창업 현황을 살펴보고, 앞에서 분석한 모든 데이터를 
+                    종합하여 목포 청년 정책의 방향을 제시해보겠습니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- 창업 현황 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">청년 창업 생태계 현황</h3>
+                    <div class="text-center mb-8">
+                        <div class="text-5xl font-bold text-yellow-400 mb-4">6,778개</div>
+                        <p class="text-blue-100">청년 등록사업체 (전체의 15.6%)</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">전국 평균과의 비교</h4>
+                            <p class="text-sm text-blue-100">
+                                전국 평균 청년 창업률 18.3%에 비해 낮은 수준으로, 
+                                창업 환경의 개선이 필요합니다.
+                            </p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">업종별 특성</h4>
+                            <p class="text-sm text-blue-100">
+                                주로 소규모 서비스업 중심이며, 혁신적이거나 
+                                고부가가치 창업은 상대적으로 부족한 상황입니다.
+                            </p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">지원 체계의 한계</h4>
+                            <p class="text-sm text-blue-100">
+                                창업 지원 프로그램은 있으나, 실질적인 성공으로 이어지는 
+                                사례가 제한적이며 지속가능성이 낮습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 종합 분석 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">데이터가 말하는 목포의 현실</h3>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-yellow-400 pl-4">
+                            <h4 class="font-semibold mb-2">위기의 악순환</h4>
+                            <p class="text-sm text-blue-100">
+                                청년 유출 → 지역 활력 저하 → 일자리 감소 → 더 많은 청년 유출의 
+                                악순환이 가속화되고 있습니다.
+                            </p>
+                        </div>
+                        <div class="border-l-4 border-green-400 pl-4">
+                            <h4 class="font-semibold mb-2">기회의 요소</h4>
+                            <p class="text-sm text-blue-100">
+                                63.5%의 미혼율과 50%를 넘는 1인가구 비율은 새로운 형태의 
+                                경제활동에 대한 개방성을 의미할 수 있습니다.
+                            </p>
+                        </div>
+                        <div class="border-l-4 border-blue-400 pl-4">
+                            <h4 class="font-semibold mb-2">정책의 방향</h4>
+                            <p class="text-sm text-blue-100">
+                                전통적인 고용창출 정책을 넘어서, 청년들이 주도하는 
+                                새로운 경제 생태계 구축이 필요합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 최종 제언 -->
+            <div class="mt-16 bg-white bg-opacity-15 rounded-xl p-8">
+                <h3 class="text-2xl font-bold mb-8 text-center">목포 커넥트: 데이터 기반의 해법</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-mokpo-navy text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3">문제 인식</h4>
+                        <p class="text-sm text-blue-100">
+                            단순한 일자리 부족이 아닌, 청년들이 원하는 
+                            '의미 있는 일'의 부족이 핵심 문제
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-network-wired text-mokpo-navy text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3">해법 제시</h4>
+                        <p class="text-sm text-blue-100">
+                            플랫폼 기반의 새로운 경제활동으로 
+                            창의성과 안정성을 동시에 추구
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-mokpo-navy text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3">미래 비전</h4>
+                        <p class="text-sm text-blue-100">
+                            청년이 주도하는 혁신적 지역경제 생태계로 
+                            목포의 지속가능한 발전 견인
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <p class="text-lg text-blue-100 mb-6">
+                        이 모든 데이터는 결국 하나의 메시지를 전합니다:<br>
+                        <strong>"목포는 변화가 필요하고, 그 변화는 청년들로부터 시작되어야 한다"</strong>
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-white text-mokpo-navy px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-download mr-2"></i>
+                            통계 자료 다운로드
+                        </button>
+                        <button class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-mokpo-navy transition-colors">
+                            <i class="fas fa-chart-line mr-2"></i>
+                            상세 분석 보고서
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 목포 커넥트. 2025년 목포시 시정발전 정책제안 공모전 청년 현황 분석.</p>
+        </div>
+    </footer>
+
+    <!-- 스크립트 -->
+    <script src="script.js"></script>
+    <script>
+        // 인구 구성 도넛 차트
+        const populationCtx = document.getElementById('populationChart').getContext('2d');
+        new Chart(populationCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['청년층 (18-39세)', '기타 연령층'],
+                datasets: [{
+                    data: [52728, 164211],
+                    backgroundColor: ['#2563eb', '#e5e7eb'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 청년 인구 변화 추이 차트
+        const youthTrendCtx = document.getElementById('youthTrendChart').getContext('2d');
+        new Chart(youthTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2022년', '2023년', '2024년'],
+                datasets: [{
+                    label: '청년 인구',
+                    data: [73698, 70579, 67460],
+                    borderColor: '#dc2626',
+                    backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 60000,
+                        max: 75000
+                    }
+                }
+            }
+        });
+
+        // 혼인 현황 도넛 차트
+        const marriageCtx = document.getElementById('marriageChart').getContext('2d');
+        new Chart(marriageCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['미혼', '기혼', '기타'],
+                datasets: [{
+                    data: [63.5, 34.0, 2.5],
+                    backgroundColor: ['#f472b6', '#34d399', '#fbbf24'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 소득 분포 막대 차트
+        const incomeCtx = document.getElementById('incomeChart').getContext('2d');
+        new Chart(incomeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['100만원 미만', '100-200만원', '200-300만원', '300-400만원', '400-500만원', '500만원 이상'],
+                datasets: [{
+                    label: '가구 비율 (%)',
+                    data: [15, 25, 30, 20, 7, 3],
+                    backgroundColor: ['#fef3c7', '#fed7aa', '#86efac', '#7dd3fc', '#c4b5fd', '#fda4af'],
+                    borderColor: '#374151',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 소비 분포 막대 차트
+        const consumptionCtx = document.getElementById('consumptionChart').getContext('2d');
+        new Chart(consumptionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['100만원 미만', '100-200만원', '200-300만원', '300-400만원', '400만원 이상'],
+                datasets: [{
+                    label: '가구 비율 (%)',
+                    data: [20, 31.8, 28, 15, 5.2],
+                    backgroundColor: ['#ddd6fe', '#bfdbfe', '#bbf7d0', '#fed7aa', '#fca5a5'],
+                    borderColor: '#374151',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 고용보험 가입 기간 차트
+        const employmentCtx = document.getElementById('employmentChart').getContext('2d');
+        new Chart(employmentCtx, {
+            type: 'pie',
+            data: {
+                labels: ['1년 미만', '1-3년', '3-5년', '5년 이상'],
+                datasets: [{
+                    data: [38.9, 25.6, 18.2, 17.3],
+                    backgroundColor: ['#fca5a5', '#fed7aa', '#86efac', '#7dd3fc'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 페이지 로드 시 애니메이션
+        window.addEventListener('load', function() {
+            const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-up');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

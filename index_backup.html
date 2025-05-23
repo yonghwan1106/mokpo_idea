@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목포 컨넥트 - 목포형 청년 창업-관광 융합 플랫폼</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        // Tailwind 커스텀 테마 설정
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mokpo-blue': '#2563eb',
+                        'mokpo-navy': '#1e3a8a',
+                        'mokpo-cyan': '#0891b2',
+                        'mokpo-orange': '#ea580c',
+                        'mokpo-yellow': '#fbbf24'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 커스텀 애니메이션 키프레임 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-mokpo-navy">목포 컨넥트</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex space-x-8">
+                        <a href="#hero" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">개요</a>
+                        <a href="#solution" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">솔루션</a>
+                        <a href="#implementation" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">추진방안</a>
+                        <a href="#benefits" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">기대효과</a>
+                        <a href="trend-analysis.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">트렌드 분석</a>
+                        <a href="youth-statistics.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">청년 현황</a>
+                        <a href="benchmarking.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">벤치마킹</a>
+                    </div>
+                </div>
+                <!-- 모바일 메뉴 버튼 -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="bg-gray-100 p-2 rounded-md">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#hero" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">개요</a>
+                <a href="#solution" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">솔루션</a>
+                <a href="#implementation" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">추진방안</a>
+                <a href="#benefits" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">기대효과</a>
+                <a href="trend-analysis.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">트렌드 분석</a>
+                <a href="youth-statistics.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">청년 현황</a>
+                <a href="benchmarking.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">벤치마킹</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section id="hero" class="bg-gradient-to-br from-mokpo-blue to-mokpo-cyan text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    목포 컨넥트
+                    <span class="block text-xl md:text-2xl font-normal mt-2 text-blue-100">
+                        MOKPO CONNECT
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    목포형 청년 창업-관광 융합 플랫폼
+                </p>
+                <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                    청년이 만드는 목포, 관광객이 발견하는 목포<br>
+                    AI와 블록체인 기술로 연결하는 혁신적인 지역경제 활성화 모델
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-mokpo-blue px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        제안서 다운로드
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-colors">
+                        영상으로 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 핵심 문제 정의 섹션 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-mokpo-navy mb-4">
+                    목포시가 직면한 현실
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    데이터가 말하는 목포의 위기와 기회
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <!-- 통계 카드 1 -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                    <div class="text-3xl font-bold text-red-600 mb-2">-6,238명</div>
+                    <p class="text-gray-700 text-sm">최근 3년간 청년 인구 감소</p>
+                </div>
+                <!-- 통계 카드 2 -->
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6 text-center">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">60.2%</div>
+                    <p class="text-gray-700 text-sm">전남 최하위 고용률</p>
+                </div>
+                <!-- 통계 카드 3 -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                    <div class="text-3xl font-bold text-yellow-600 mb-2">58.95점</div>
+                    <p class="text-gray-700 text-sm">목포 관광 연평균 관심도</p>
+                </div>
+                <!-- 통계 카드 4 -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2">75.87점</div>
+                    <p class="text-gray-700 text-sm">경제정책 관심도 (1위)</p>
+                </div>
+            </div>
+
+            <!-- 문제 분석 차트 -->
+            <div class="bg-gray-50 rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">
+                    주요 과제 분석
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line-down text-2xl text-red-600"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3">청년층 유출 가속화</h4>
+                        <p class="text-gray-600 text-sm">20대 청년층이 전체 이탈 인구의 절반을 차지하며, 지역 활력이 급속히 감소하고 있습니다.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-briefcase text-2xl text-orange-600"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3">양질의 일자리 부족</h4>
+                        <p class="text-gray-600 text-sm">전남 최하위 고용률과 높은 실업률로 청년들의 지역 정착을 어렵게 만들고 있습니다.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calendar-alt text-2xl text-yellow-600"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3">관광의 계절성 문제</h4>
+                        <p class="text-gray-600 text-sm">여름철에만 집중되는 관광 패턴으로 연중 지속적인 수익 창출이 어려운 상황입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 솔루션 섹션 -->
+    <section id="solution" class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-mokpo-navy mb-4">
+                    목포 컨넥트 솔루션
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    청년 창업과 관광을 연결하는 혁신적인 플랫폼
+                </p>
+            </div>
+
+            <!-- 플랫폼 개요 -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-mokpo-navy mb-6">
+                            핵심 컨셉
+                        </h3>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            목포 커넥트는 지역 청년 창업가들이 기획하고 운영하는 체험형 관광상품을 
+                            관광객들이 쉽게 발견하고 참여할 수 있도록 연결하는 디지털 플랫폼입니다. 
+                            AI 기반 맞춤형 큐레이션과 블록체인 기반 지역화폐를 활용하여 
+                            지역 경제의 선순환 구조를 만들어갑니다.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-mokpo-blue rounded-full flex items-center justify-center">
+                                    <i class="fas fa-users text-white text-sm"></i>
+                                </div>
+                                <span class="text-gray-700">청년 창업가와 관광객을 연결</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-mokpo-cyan rounded-full flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-sm"></i>
+                                </div>
+                                <span class="text-gray-700">AI 기반 개인화된 관광 경험 제공</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-mokpo-orange rounded-full flex items-center justify-center">
+                                    <i class="fas fa-coins text-white text-sm"></i>
+                                </div>
+                                <span class="text-gray-700">블록체인 지역화폐로 지역 내 순환</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="relative">
+                            <div class="w-80 h-80 mx-auto bg-gradient-to-br from-mokpo-blue to-mokpo-cyan rounded-full flex items-center justify-center animate-float">
+                                <div class="text-white text-center">
+                                    <i class="fas fa-network-wired text-6xl mb-4"></i>
+                                    <div class="text-lg font-semibold">목포 커넥트</div>
+                                    <div class="text-sm opacity-90">플랫폼</div>
+                                </div>
+                            </div>
+                            <!-- 주변 연결 요소들 -->
+                            <div class="absolute -top-4 -left-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <i class="fas fa-user-tie text-mokpo-blue text-xl"></i>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <i class="fas fa-plane text-mokpo-cyan text-xl"></i>
+                            </div>
+                            <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <i class="fas fa-store text-mokpo-orange text-xl"></i>
+                            </div>
+                            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <i class="fas fa-map-marked-alt text-mokpo-yellow text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 핵심 기능 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-mokpo-blue rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-mokpo-navy mb-3">AI 맞춤 큐레이션</h4>
+                    <p class="text-gray-600 text-sm">개인의 취향과 여행 패턴을 분석하여 최적의 체험 프로그램을 추천합니다.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-mokpo-cyan rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-mokpo-navy mb-3">실시간 예약 시스템</h4>
+                    <p class="text-gray-600 text-sm">원클릭으로 체험 프로그램을 예약하고 목포페이로 결제할 수 있습니다.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-mokpo-orange rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-link text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-mokpo-navy mb-3">블록체인 지역화폐</h4>
+                    <p class="text-gray-600 text-sm">목포페이 연동으로 지역 내 경제 순환을 극대화하고 투명한 거래를 보장합니다.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-mokpo-yellow rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-star text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-mokpo-navy mb-3">품질 관리 시스템</h4>
+                    <p class="text-gray-600 text-sm">쌍방향 평가와 지속적인 교육을 통해 서비스 품질을 유지합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 체험 프로그램 섹션 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-mokpo-navy mb-4">
+                    목포 특화 체험 프로그램
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    청년 크리에이터들이 만드는 독특하고 매력적인 목포 체험
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 체험 프로그램 카드 1 -->
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-red-500 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-utensils text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">목포 9미(九味) 체험</h3>
+                        <p class="text-gray-600 mb-4">세발낙지, 홍어삼합 등 목포 대표 음식 9가지를 직접 만들고 맛보는 체험</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div>• 세발낙지 잡기 + 요리 교실</div>
+                            <div>• 홍어삼합 스토리텔링 투어</div>
+                            <div>• 전통 과자 만들기 체험</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 체험 프로그램 카드 2 -->
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-vr-cardboard text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">근대역사 몰입 체험</h3>
+                        <p class="text-gray-600 mb-4">AR/VR 기술로 1900년대 목포로 시간여행하는 특별한 경험</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div>• 1900년대 목포항 VR 시뮬레이션</div>
+                            <div>• 일제강점기 저항 운동 역할극</div>
+                            <div>• 문인들과의 가상 대화</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 체험 프로그램 카드 3 -->
+                <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-ship text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">다도해 해양 모험</h3>
+                        <p class="text-gray-600 mb-4">목포만의 특별한 지리적 위치를 활용한 섬 체험 프로그램</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div>• 무인도 서바이벌 체험</div>
+                            <div>• 어민과 함께하는 어업 체험</div>
+                            <div>• 야경 크루즈 + 버스킹 공연</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 체험 프로그램 카드 4 -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-palette text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">목포 예술 창작 체험</h3>
+                        <p class="text-gray-600 mb-4">지역 청년 예술가들과 함께하는 창작 활동 체험</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div>• 시화골목 벽화 그리기</div>
+                            <div>• 목포 출신 가수 노래 레슨</div>
+                            <div>• 목포 도자기 만들기</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 체험 프로그램 카드 5 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-yellow-500 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-mountain text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">유달산 자연 체험</h3>
+                        <p class="text-gray-600 mb-4">목포의 상징 유달산에서 즐기는 자연과 문화가 어우러진 체험</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div>• 유달산 사생 대회 + 미니 전시</div>
+                            <div>• 자연 식재료 채집 + 건강식 만들기</div>
+                            <div>• 일출 요가 + 명상 체험</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 체험 프로그램 카드 6 -->
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-pink-500 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-camera text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">목포 스토리텔링 투어</h3>
+                        <p class="text-gray-600 mb-4">청년 크리에이터들이 전하는 목포만의 특별한 이야기들</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div>• 목포 9경 포토 투어</div>
+                            <div>• 근대문화유산 스토리텔링</div>
+                            <div>• 목포 출신 인물 따라가기</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 추진방안 섹션 -->
+    <section id="implementation" class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-mokpo-navy mb-4">
+                    단계별 추진방안
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    체계적이고 실현 가능한 3단계 로드맵
+                </p>
+            </div>
+
+            <!-- 타임라인 -->
+            <div class="relative">
+                <!-- 세로 연결선 -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-mokpo-blue lg:block hidden"></div>
+                
+                <!-- 1단계 -->
+                <div class="relative mb-16">
+                    <div class="lg:flex items-center">
+                        <div class="lg:w-1/2 lg:pr-8 mb-8 lg:mb-0">
+                            <div class="bg-white rounded-xl shadow-lg p-8">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-12 h-12 bg-mokpo-blue rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold text-lg">1</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-mokpo-navy">기반 구축 단계</h3>
+                                        <p class="text-gray-500">2025년 7월 ~ 12월 (6개월)</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                        <span class="text-gray-700">플랫폼 MVP 개발 및 베타 테스트</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                        <span class="text-gray-700">크리에이터 100명 모집 및 교육</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                        <span class="text-gray-700">창작 공간 5곳 확보 및 리모델링</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                        <span class="text-gray-700">기본 체험 프로그램 20종 개발</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-8">
+                            <div class="bg-mokpo-blue rounded-xl p-8 text-white">
+                                <h4 class="text-lg font-semibold mb-4">주요 성과 목표</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">100명</div>
+                                        <div class="text-sm opacity-90">크리에이터 모집</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">20종</div>
+                                        <div class="text-sm opacity-90">체험 프로그램</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">5곳</div>
+                                        <div class="text-sm opacity-90">창작 공간</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">1만건</div>
+                                        <div class="text-sm opacity-90">플랫폼 테스트</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 중앙 아이콘 -->
+                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full border-4 border-mokpo-blue flex items-center justify-center lg:block hidden">
+                        <i class="fas fa-rocket text-mokpo-blue text-xl"></i>
+                    </div>
+                </div>
+
+                <!-- 2단계 -->
+                <div class="relative mb-16">
+                    <div class="lg:flex items-center">
+                        <div class="lg:w-1/2 lg:pr-8 mb-8 lg:mb-0 lg:order-2">
+                            <div class="bg-white rounded-xl shadow-lg p-8">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-12 h-12 bg-mokpo-cyan rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold text-lg">2</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-mokpo-navy">서비스 확산 단계</h3>
+                                        <p class="text-gray-500">2026년 1월 ~ 12월 (12개월)</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                        <span class="text-gray-700">플랫폼 정식 런칭 및 마케팅</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                        <span class="text-gray-700">크리에이터 300명으로 확대</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                        <span class="text-gray-700">체험 프로그램 50종으로 확장</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                        <span class="text-gray-700">전국 마케팅 및 패키지 상품 개발</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-8 lg:order-1">
+                            <div class="bg-mokpo-cyan rounded-xl p-8 text-white">
+                                <h4 class="text-lg font-semibold mb-4">주요 성과 목표</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">300명</div>
+                                        <div class="text-sm opacity-90">크리에이터 확대</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">50종</div>
+                                        <div class="text-sm opacity-90">체험 프로그램</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">5만건</div>
+                                        <div class="text-sm opacity-90">연간 예약</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">4.5점</div>
+                                        <div class="text-sm opacity-90">만족도 목표</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 중앙 아이콘 -->
+                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full border-4 border-mokpo-cyan flex items-center justify-center lg:block hidden">
+                        <i class="fas fa-chart-line text-mokpo-cyan text-xl"></i>
+                    </div>
+                </div>
+
+                <!-- 3단계 -->
+                <div class="relative">
+                    <div class="lg:flex items-center">
+                        <div class="lg:w-1/2 lg:pr-8 mb-8 lg:mb-0">
+                            <div class="bg-white rounded-xl shadow-lg p-8">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-12 h-12 bg-mokpo-orange rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold text-lg">3</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-mokpo-navy">고도화 및 확산 단계</h3>
+                                        <p class="text-gray-500">2027년 1월 ~ 2028년 6월 (18개월)</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                                        <span class="text-gray-700">AI/IoT 기술 고도화 및 개인화 강화</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                                        <span class="text-gray-700">크리에이터 500명, 프로그램 100종 달성</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                                        <span class="text-gray-700">해외 관광객 대상 다국어 서비스</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                                        <span class="text-gray-700">타 지자체 모델 수출 및 독립 법인화</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-8">
+                            <div class="bg-mokpo-orange rounded-xl p-8 text-white">
+                                <h4 class="text-lg font-semibold mb-4">주요 성과 목표</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">500명</div>
+                                        <div class="text-sm opacity-90">최종 크리에이터</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">100종</div>
+                                        <div class="text-sm opacity-90">체험 프로그램</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">10만건</div>
+                                        <div class="text-sm opacity-90">연간 예약</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold mb-1">4.8점</div>
+                                        <div class="text-sm opacity-90">최종 만족도</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 중앙 아이콘 -->
+                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full border-4 border-mokpo-orange flex items-center justify-center lg:block hidden">
+                        <i class="fas fa-globe text-mokpo-orange text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 기대효과 섹션 -->
+    <section id="benefits" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-mokpo-navy mb-4">
+                    기대효과
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    목포 커넥트가 가져올 긍정적인 변화
+                </p>
+            </div>
+
+            <!-- 정량적 효과 -->
+            <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-8 mb-12">
+                <h3 class="text-2xl font-bold text-center text-mokpo-navy mb-8">정량적 효과</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-green-600 mb-2">700개</div>
+                        <div class="text-gray-700 font-medium">창출 일자리</div>
+                        <div class="text-sm text-gray-500 mt-1">직접 500개 + 간접 200개</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-blue-600 mb-2">275%</div>
+                        <div class="text-gray-700 font-medium">관광수입 증가</div>
+                        <div class="text-sm text-gray-500 mt-1">36억원 → 135억원</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-plane text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-purple-600 mb-2">50%</div>
+                        <div class="text-gray-700 font-medium">관광객 증가</div>
+                        <div class="text-sm text-gray-500 mt-1">30만명 → 45만명</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-coins text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-orange-600 mb-2">50억원</div>
+                        <div class="text-gray-700 font-medium">지역화폐 유통</div>
+                        <div class="text-sm text-gray-500 mt-1">연간 지역 내 순환</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 정성적 효과 -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-50 rounded-xl p-8">
+                    <div class="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-heart text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-mokpo-navy mb-4">청년층 지역 정착률 향상</h4>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>경제적 자립 기회 제공으로 유출 감소</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>창업 생태계 활성화로 혁신 인재 유입</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>지역에 대한 자긍심과 소속감 증대</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-purple-50 rounded-xl p-8">
+                    <div class="w-16 h-16 bg-purple-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-award text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-mokpo-navy mb-4">목포 브랜드 이미지 혁신</h4>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>"떠나는 도시"에서 "찾아오는 도시"로</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>청년 친화적 도시 브랜드 확립</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>혁신과 전통이 조화된 문화관광도시</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-green-50 rounded-xl p-8">
+                    <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-recycle text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-mokpo-navy mb-4">지속가능한 관광 모델</h4>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>친환경 관광 콘텐츠 개발</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>관광 수익의 지역 환류 구조 확립</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-star text-yellow-400 mt-1"></i>
+                            <span>계절성 극복을 통한 연중 관광객 유입</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 성과 지표 차트 -->
+            <div class="mt-16 bg-gray-50 rounded-xl p-8">
+                <h3 class="text-2xl font-bold text-center text-mokpo-navy mb-8">3년간 예상 성과</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center">
+                        <thead>
+                            <tr class="border-b-2 border-mokpo-navy">
+                                <th class="py-4 px-6 text-mokpo-navy font-bold">구분</th>
+                                <th class="py-4 px-6 text-mokpo-navy font-bold">1년차</th>
+                                <th class="py-4 px-6 text-mokpo-navy font-bold">2년차</th>
+                                <th class="py-4 px-6 text-mokpo-navy font-bold">3년차</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="py-4 px-6 font-semibold">크리에이터 수</td>
+                                <td class="py-4 px-6">100명</td>
+                                <td class="py-4 px-6">300명</td>
+                                <td class="py-4 px-6">500명</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-semibold">플랫폼 예약 건수</td>
+                                <td class="py-4 px-6">1만건</td>
+                                <td class="py-4 px-6">5만건</td>
+                                <td class="py-4 px-6">10만건</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-semibold">청년 정착률 증가</td>
+                                <td class="py-4 px-6">+10%</td>
+                                <td class="py-4 px-6">+25%</td>
+                                <td class="py-4 px-6">+40%</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-semibold">이용객 만족도</td>
+                                <td class="py-4 px-6">4.0/5.0</td>
+                                <td class="py-4 px-6">4.5/5.0</td>
+                                <td class="py-4 px-6">4.8/5.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA 섹션 -->
+    <section class="py-16 bg-gradient-to-br from-mokpo-blue to-mokpo-cyan text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                목포의 미래, 지금 시작하세요
+            </h2>
+            <p class="text-xl mb-8 text-blue-100 max-w-3xl mx-auto">
+                목포 커넥트와 함께 "청년이 찾는 큰 목포"를 만들어가겠습니다
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-mokpo-blue px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-download mr-2"></i>
+                    제안서 전체 다운로드
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-colors">
+                    <i class="fas fa-phone mr-2"></i>
+                    문의하기
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">목포 커넥트</h3>
+                    <p class="text-gray-300 mb-4">
+                        목포형 청년 창업-관광 융합 플랫폼으로<br>
+                        청년이 만드는 목포, 관광객이 발견하는 목포를 구현합니다.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">빠른 링크</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#solution" class="text-gray-300 hover:text-white">솔루션</a></li>
+                        <li><a href="#implementation" class="text-gray-300 hover:text-white">추진방안</a></li>
+                        <li><a href="#benefits" class="text-gray-300 hover:text-white">기대효과</a></li>
+                        <li><a href="trend-analysis.html" class="text-gray-300 hover:text-white">트렌드 분석</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">연락처</h4>
+                    <div class="space-y-3 text-gray-300">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>전남 목포시 양을로 203</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-phone"></i>
+                            <span>061-270-3624</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-envelope"></i>
+                            <span>heylim941124@korea.kr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 목포시. 2025년 시정발전 정책제안 공모전 출품작.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 스크립트 -->
+    <script src="script.js"></script>
+</body>
+</html>

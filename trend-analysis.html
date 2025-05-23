@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트렌드 분석 보고서 - 목포 커넥트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mokpo-blue': '#2563eb',
+                        'mokpo-navy': '#1e3a8a',
+                        'mokpo-cyan': '#0891b2',
+                        'mokpo-orange': '#ea580c',
+                        'mokpo-yellow': '#fbbf24'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-mokpo-navy">목포 커넥트</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">홈</a>
+                        <a href="#analysis" class="text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">트렌드 분석</a>
+                        <a href="youth-statistics.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">청년 현황</a>
+                        <a href="benchmarking.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium">벤치마킹</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="bg-gray-100 p-2 rounded-md">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">홈</a>
+                <a href="#analysis" class="block px-3 py-2 text-mokpo-blue bg-gray-100 rounded-md">트렌드 분석</a>
+                <a href="youth-statistics.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">청년 현황</a>
+                <a href="benchmarking.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">벤치마킹</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 헤더 섹션 -->
+    <section class="bg-gradient-to-br from-mokpo-blue to-mokpo-cyan text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                    네이버 데이터랩 트렌드 분석 보고서
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    2025년 목포시 시정발전 공모전 주제 선정을 위한 시민 관심도 분석
+                </p>
+                <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">24개월</div>
+                        <div class="text-sm">분석 기간</div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">5개 그룹</div>
+                        <div class="text-sm">키워드 그룹</div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">월별</div>
+                        <div class="text-sm">분석 단위</div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                        <div class="text-2xl font-bold">전국</div>
+                        <div class="text-sm">분석 범위</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 분석 개요 섹션 -->
+    <section id="analysis" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">분석 개요</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    네이버 데이터랩 검색어 트렌드 API를 활용하여 시민들의 관심사를 정량적으로 분석했습니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- 분석 방법론 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6">분석 방법론</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">분석 목적</h4>
+                            <p class="text-gray-700">목포시 시정발전 정책제안 공모전 주제 선정을 위한 시민 관심도 트렌드 분석</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">분석 기간</h4>
+                            <p class="text-gray-700">2023년 1월 ~ 2024년 12월 (24개월)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">분석 도구</h4>
+                            <p class="text-gray-700">네이버 데이터랩 검색어 트렌드 API</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">측정 방법</h4>
+                            <p class="text-gray-700">상대적 검색량 (최고점 100 기준)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 키워드 그룹 분류 -->
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold text-mokpo-navy mb-6">키워드 그룹 분류</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border-l-4 border-red-400">
+                            <h4 class="font-semibold text-gray-800">지역발전</h4>
+                            <p class="text-sm text-gray-600">목포, 발전, 청년</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-l-4 border-blue-400">
+                            <h4 class="font-semibold text-gray-800">경제정책</h4>
+                            <p class="text-sm text-gray-600">경제, 일자리, 산업</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-l-4 border-green-400">
+                            <h4 class="font-semibold text-gray-800">사회정책</h4>
+                            <p class="text-sm text-gray-600">교육, 복지, 문화</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-l-4 border-yellow-400">
+                            <h4 class="font-semibold text-gray-800">생활정책</h4>
+                            <p class="text-sm text-gray-600">주거, 안전, 환경</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-l-4 border-purple-400">
+                            <h4 class="font-semibold text-gray-800">목포특화</h4>
+                            <p class="text-sm text-gray-600">목포, 관광, 항구</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 종합 트렌드 순위 섹션 -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">종합 트렌드 순위</h2>
+                <p class="text-lg text-gray-600">24개월 평균 검색량 기준 순위</p>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-8">
+                <!-- 1위 - 경제정책 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 p-6 text-center">
+                        <div class="text-3xl font-bold text-white mb-2">1위</div>
+                        <div class="text-sm text-yellow-100">최고 관심도</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-mokpo-navy mb-2">경제정책</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-2">75.87점</div>
+                        <p class="text-gray-600 text-sm">경제, 일자리, 산업</p>
+                        <div class="mt-4 bg-blue-100 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 75.87%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2위 - 생활정책 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-gray-400 to-gray-500 p-6 text-center">
+                        <div class="text-3xl font-bold text-white mb-2">2위</div>
+                        <div class="text-sm text-gray-100">안정적 관심</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-mokpo-navy mb-2">생활정책</h3>
+                        <div class="text-3xl font-bold text-green-600 mb-2">71.83점</div>
+                        <p class="text-gray-600 text-sm">주거, 안전, 환경</p>
+                        <div class="mt-4 bg-green-100 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 71.83%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3위 - 사회정책 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-center">
+                        <div class="text-3xl font-bold text-white mb-2">3위</div>
+                        <div class="text-sm text-amber-100">중간 관심도</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-mokpo-navy mb-2">사회정책</h3>
+                        <div class="text-3xl font-bold text-purple-600 mb-2">67.41점</div>
+                        <p class="text-gray-600 text-sm">교육, 복지, 문화</p>
+                        <div class="mt-4 bg-purple-100 rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 67.41%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4위 - 지역발전 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-slate-400 to-slate-500 p-6 text-center">
+                        <div class="text-3xl font-bold text-white mb-2">4위</div>
+                        <div class="text-sm text-slate-100">평균 관심도</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-mokpo-navy mb-2">지역발전</h3>
+                        <div class="text-3xl font-bold text-red-600 mb-2">63.41점</div>
+                        <p class="text-gray-600 text-sm">목포, 발전, 청년</p>
+                        <div class="mt-4 bg-red-100 rounded-full h-2">
+                            <div class="bg-red-500 h-2 rounded-full" style="width: 63.41%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5위 - 목포특화 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-stone-400 to-stone-500 p-6 text-center">
+                        <div class="text-3xl font-bold text-white mb-2">5위</div>
+                        <div class="text-sm text-stone-100">계절성 강함</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-mokpo-navy mb-2">목포특화</h3>
+                        <div class="text-3xl font-bold text-orange-600 mb-2">58.95점</div>
+                        <p class="text-gray-600 text-sm">목포, 관광, 항구</p>
+                        <div class="mt-4 bg-orange-100 rounded-full h-2">
+                            <div class="bg-orange-500 h-2 rounded-full" style="width: 58.95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 트렌드 차트 -->
+            <div class="mt-16 bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">24개월 트렌드 변화</h3>
+                <div class="h-96">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 계절별 분석 섹션 -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">계절별 패턴 분석</h2>
+                <p class="text-lg text-gray-600">월별 검색 트렌드에서 발견한 주요 패턴</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 3월 패턴 -->
+                <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-seedling text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">3월 급상승</h3>
+                    <p class="text-gray-700 text-center text-sm mb-4">모든 분야에서 최고점 기록</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span>경제정책</span>
+                            <span class="font-bold">100.00점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>생활정책</span>
+                            <span class="font-bold">100.00점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>사회정책</span>
+                            <span class="font-bold">100.00점</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-green-600 mt-4 text-center font-medium">새 정부/정책 발표시기</p>
+                </div>
+
+                <!-- 7월 패턴 -->
+                <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-sun text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">7월 관광 피크</h3>
+                    <p class="text-gray-700 text-center text-sm mb-4">목포특화·지역발전 집중</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span>목포특화</span>
+                            <span class="font-bold">100.00점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>지역발전</span>
+                            <span class="font-bold">100.00점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>기타</span>
+                            <span class="font-bold">평균 이하</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-yellow-600 mt-4 text-center font-medium">여름 휴가철 영향</p>
+                </div>
+
+                <!-- 12월 패턴 -->
+                <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">12월 경제 급등</h3>
+                    <p class="text-gray-700 text-center text-sm mb-4">경제정책 관심 재상승</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span>2024년 12월</span>
+                            <span class="font-bold">89.20점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>전년 대비</span>
+                            <span class="font-bold">+15점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>상승 폭</span>
+                            <span class="font-bold">급격한 증가</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-blue-600 mt-4 text-center font-medium">연말 경제정책 이슈</p>
+                </div>
+
+                <!-- 2월 패턴 -->
+                <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-arrow-down text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">2월 전체 하락</h3>
+                    <p class="text-gray-700 text-center text-sm mb-4">모든 분야 최저점</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span>전 분야</span>
+                            <span class="font-bold">최저 기록</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>평균 대비</span>
+                            <span class="font-bold">-20~30점</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>원인</span>
+                            <span class="font-bold">설 연휴</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-red-600 mt-4 text-center font-medium">명절 휴식기 영향</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 주제 추천 섹션 -->
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-mokpo-navy mb-4">공모전 주제 추천</h2>
+                <p class="text-lg text-gray-600">데이터 분석 결과를 바탕으로 한 전략적 제언</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- 우선순위 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 p-6">
+                        <h3 class="text-xl font-bold text-white text-center">우선순위 1</h3>
+                        <p class="text-yellow-100 text-center">최고 관심도 분야</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-mokpo-navy mb-4">경제정책 관련</h4>
+                        <div class="bg-blue-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-gray-600"><strong>근거:</strong> 24개월 평균 최고 관심도(75.87점), 2024년 말 급상승세</p>
+                        </div>
+                        <h5 class="font-semibold mb-3">추천 주제</h5>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-blue-500 mt-0.5"></i>
+                                <span>청년 일자리 창출을 위한 목포형 스타트업 지원 정책</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-blue-500 mt-0.5"></i>
+                                <span>전통시장 활성화와 디지털화를 통한 지역경제 부흥</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-blue-500 mt-0.5"></i>
+                                <span>목포항을 활용한 물류·해운 산업 발전 방안</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 우선순위 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-gray-400 to-gray-500 p-6">
+                        <h3 class="text-xl font-bold text-white text-center">우선순위 2</h3>
+                        <p class="text-gray-100 text-center">생활 밀착형 관심</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-mokpo-navy mb-4">생활정책 관련</h4>
+                        <div class="bg-green-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-gray-600"><strong>근거:</strong> 평균 71.83점, 시민 체감도 높은 실생활 밀접 분야</p>
+                        </div>
+                        <h5 class="font-semibold mb-3">추천 주제</h5>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-green-500 mt-0.5"></i>
+                                <span>목포시 주거 불안정 해소를 위한 청년 주택 정책</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-green-500 mt-0.5"></i>
+                                <span>스마트시티 기반 시민 안전망 구축 방안</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-green-500 mt-0.5"></i>
+                                <span>탄소중립 실현을 위한 목포형 환경 정책</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 우선순위 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6">
+                        <h3 class="text-xl font-bold text-white text-center">우선순위 3</h3>
+                        <p class="text-amber-100 text-center">봄철 관심 집중</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-mokpo-navy mb-4">사회정책 관련</h4>
+                        <div class="bg-purple-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-gray-600"><strong>근거:</strong> 평균 67.41점, 봄철 높은 관심도</p>
+                        </div>
+                        <h5 class="font-semibold mb-3">추천 주제</h5>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-purple-500 mt-0.5"></i>
+                                <span>목포시 교육 불균형 해소를 위한 혁신교육 정책</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-purple-500 mt-0.5"></i>
+                                <span>고령화 사회 대응 목포형 복지 모델</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-lightbulb text-purple-500 mt-0.5"></i>
+                                <span>목포 문화유산을 활용한 문화도시 조성</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 현재 시점 권장 전략 -->
+            <div class="mt-16 bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-mokpo-navy mb-6 text-center">현재 시점(5월) 권장 전략</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-briefcase text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-3">경제분야 중점</h4>
+                        <p class="text-gray-600 text-sm">일자리, 산업 정책 (지속적 고관심)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-home text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-3">생활분야 병행</h4>
+                        <p class="text-gray-600 text-sm">주거, 환경 정책 (봄철 관심 상승)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-3">교육분야 연계</h4>
+                        <p class="text-gray-600 text-sm">새 학기 연계 교육 정책</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 결론 섹션 -->
+    <section class="py-16 bg-mokpo-navy text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">결론 및 제언</h2>
+                <p class="text-xl text-blue-100">데이터가 제시하는 목포시 정책 방향</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- 핵심 인사이트 -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">핵심 인사이트</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-chart-line text-yellow-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">경제정책이 최우선 관심사</h4>
+                                    <p class="text-blue-100 text-sm">24개월간 가장 지속적이고 높은 관심을 받음 (평균 75.87점)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-home text-green-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">생활밀착형 정책 꾸준한 수요</h4>
+                                    <p class="text-blue-100 text-sm">주거, 안전, 환경에 대한 지속적인 관심 (평균 71.83점)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-calendar-alt text-orange-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">목포 특화 이슈의 계절성</h4>
+                                    <p class="text-blue-100 text-sm">여름철 집중적 관심으로 차별화 가능성 높음</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-seedling text-green-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">3월은 정책 발표 최적 시기</h4>
+                                    <p class="text-blue-100 text-sm">모든 정책 분야의 관심이 최고조에 달하는 시기</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 전략적 제언 -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">전략적 제언</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-users text-yellow-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">경제+청년 키워드 조합</h4>
+                                    <p class="text-blue-100 text-sm">최고 관심도 분야와 목포의 핵심 과제를 결합하여 시의성 확보</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-map-marked-alt text-green-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">목포 지역 특색 반영</h4>
+                                    <p class="text-blue-100 text-sm">근대역사문화, 다도해 등 차별화된 자산 적극 활용</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-cogs text-orange-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">실행 가능성과 창의성 균형</h4>
+                                    <p class="text-blue-100 text-sm">현실적 제약 고려하되 혁신적 접근법 제시</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 bg-opacity-50 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-infinity text-green-400 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold mb-2">단기 효과와 장기 지속성</h4>
+                                    <p class="text-blue-100 text-sm">즉시 실현 가능한 성과와 미래 비전의 조화</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 데이터 출처 -->
+            <div class="mt-16 border-t border-blue-700 pt-8">
+                <div class="text-center">
+                    <h4 class="text-lg font-semibold mb-4">데이터 출처 및 분석 정보</h4>
+                    <div class="grid md:grid-cols-3 gap-6 text-sm text-blue-100">
+                        <div>
+                            <strong>데이터 출처:</strong><br>
+                            네이버 데이터랩 (NAVER DataLab)
+                        </div>
+                        <div>
+                            <strong>분석 기간:</strong><br>
+                            2023년 1월 1일 ~ 2024년 12월 31일
+                        </div>
+                        <div>
+                            <strong>분석일:</strong><br>
+                            2025년 5월 18일
+                        </div>
+                    </div>
+                    <p class="text-xs text-blue-200 mt-6">
+                        * 검색량은 절대값이 아닌 상대값으로 표시 / 지역별 편차는 고려하지 않은 전국 단위 분석
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 목포 커넥트. 2025년 목포시 시정발전 정책제안 공모전 트렌드 분석 보고서.</p>
+        </div>
+    </footer>
+
+    <!-- 스크립트 -->
+    <script src="script.js"></script>
+    <script>
+        // 트렌드 차트 생성
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        
+        // 실제 데이터를 모방한 샘플 데이터 (24개월)
+        const months = [
+            '2023-01', '2023-02', '2023-03', '2023-04', '2023-05', '2023-06',
+            '2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12',
+            '2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06',
+            '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'
+        ];
+
+        const trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: '경제정책',
+                        data: [78, 65, 100, 85, 80, 75, 70, 68, 72, 76, 74, 82, 79, 63, 95, 88, 83, 77, 71, 69, 73, 77, 75, 89],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    },
+                    {
+                        label: '생활정책',
+                        data: [75, 62, 100, 82, 78, 73, 68, 65, 70, 74, 71, 79, 76, 60, 92, 85, 80, 74, 69, 66, 71, 75, 72, 78],
+                        borderColor: '#16a34a',
+                        backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    },
+                    {
+                        label: '사회정책',
+                        data: [72, 58, 100, 79, 75, 70, 65, 62, 67, 71, 68, 76, 73, 57, 89, 82, 77, 71, 66, 63, 68, 72, 69, 75],
+                        borderColor: '#9333ea',
+                        backgroundColor: 'rgba(147, 51, 234, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    },
+                    {
+                        label: '지역발전',
+                        data: [68, 55, 95, 75, 71, 68, 100, 85, 70, 65, 62, 72, 69, 52, 85, 78, 73, 68, 90, 80, 65, 62, 58, 70],
+                        borderColor: '#dc2626',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    },
+                    {
+                        label: '목포특화',
+                        data: [65, 50, 85, 70, 65, 75, 100, 95, 70, 60, 55, 68, 62, 45, 80, 72, 68, 78, 100, 90, 65, 58, 52, 65],
+                        borderColor: '#ea580c',
+                        backgroundColor: 'rgba(234, 88, 12, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: '기간'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: '검색량 지수'
+                        },
+                        min: 0,
+                        max: 100
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+    </script>
+</body>
+</html>

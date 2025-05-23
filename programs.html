@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체험 프로그램 - 목포 커넥트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        // Tailwind 커스텀 테마 설정
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mokpo-blue': '#2563eb',
+                        'mokpo-navy': '#1e3a8a',
+                        'mokpo-cyan': '#0891b2',
+                        'mokpo-orange': '#ea580c',
+                        'mokpo-yellow': '#fbbf24'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 커스텀 애니메이션 키프레임 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* 필터 버튼 스타일 */
+        .filter-btn {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* 프로그램 카드 스타일 */
+        .program-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .program-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-image {
+            transition: transform 0.3s ease;
+        }
+
+        /* 배지 스타일 */
+        .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* 스크롤바 스타일링 */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 3px;
+        }
+
+        /* 계절별 테마 스타일 */
+        .season-spring { background: linear-gradient(135deg, #fef3c7, #ecfdf5); }
+        .season-summer { background: linear-gradient(135deg, #dbeafe, #fef3c7); }
+        .season-autumn { background: linear-gradient(135deg, #fed7aa, #fef3c7); }
+        .season-winter { background: linear-gradient(135deg, #e0e7ff, #f3f4f6); }
+
+        /* 인터랙티브 요소 */
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.05);
+        }
+
+        /* 로딩 애니메이션 */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* 별점 스타일 */
+        .star-rating {
+            color: #fbbf24;
+        }
+
+        /* 프로그램 통계 스타일 */
+        .program-stats {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-mokpo-navy hover:text-mokpo-blue transition-colors">
+                        목포 커넥트
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">홈</a>
+                        <a href="problems.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">현황분석</a>
+                        <a href="solution.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">솔루션</a>
+                        <a href="programs.html" class="text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium font-semibold">체험프로그램</a>
+                        <a href="implementation.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">추진방안</a>
+                        <a href="benefits.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">기대효과</a>
+                        <div class="relative group">
+                            <button class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                분석자료 <i class="fas fa-chevron-down ml-1"></i>
+                            </button>
+                            <div class="absolute right-0 w-48 mt-2 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <a href="trend-analysis.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">트렌드 분석</a>
+                                <a href="youth-statistics.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">청년 현황</a>
+                                <a href="benchmarking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">벤치마킹</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 모바일 메뉴 버튼 -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="bg-gray-100 p-2 rounded-md">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">홈</a>
+                <a href="problems.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">현황분석</a>
+                <a href="solution.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">솔루션</a>
+                <a href="programs.html" class="block px-3 py-2 text-mokpo-blue font-semibold bg-blue-50 rounded-md">체험프로그램</a>
+                <a href="implementation.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">추진방안</a>
+                <a href="benefits.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">기대효과</a>
+                <div class="border-t border-gray-200 pt-2">
+                    <a href="trend-analysis.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">트렌드 분석</a>
+                    <a href="youth-statistics.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">청년 현황</a>
+                    <a href="benchmarking.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">벤치마킹</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="bg-gradient-to-br from-mokpo-blue via-mokpo-cyan to-blue-600 text-white py-24 overflow-hidden relative">
+        <!-- 배경 애니메이션 요소들 -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-white bg-opacity-10 rounded-full animate-float"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-white bg-opacity-5 rounded-full animate-bounce-slow"></div>
+            <div class="absolute bottom-20 left-1/3 w-28 h-28 bg-white bg-opacity-10 rounded-full animate-pulse-slow"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center animate-fade-in">
+                <div class="mb-6">
+                    <span class="inline-block bg-white bg-opacity-20 rounded-full px-6 py-2 text-sm font-medium mb-6">
+                        목포만의 독특한 체험
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    목포 특화 체험 프로그램
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
+                    목포만의 독특한 문화적 자산과 청년들의 창의성이 만나<br>
+                    차별화된 관광 경험을 제공합니다
+                </p>
+                
+                <!-- 프로그램 통계 하이라이트 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto">
+                    <div class="text-center program-stats rounded-lg p-4">
+                        <div class="text-3xl font-bold text-yellow-300 mb-2">100+</div>
+                        <div class="text-sm">체험 프로그램</div>
+                    </div>
+                    <div class="text-center program-stats rounded-lg p-4">
+                        <div class="text-3xl font-bold text-yellow-300 mb-2">500명</div>
+                        <div class="text-sm">참여 크리에이터</div>
+                    </div>
+                    <div class="text-center program-stats rounded-lg p-4">
+                        <div class="text-3xl font-bold text-yellow-300 mb-2">4.8+</div>
+                        <div class="text-sm">평균 만족도</div>
+                    </div>
+                    <div class="text-center program-stats rounded-lg p-4">
+                        <div class="text-3xl font-bold text-yellow-300 mb-2">365일</div>
+                        <div class="text-sm">연중 운영</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToPrograms()" class="bg-white text-mokpo-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl">
+                        <i class="fas fa-play mr-2"></i>
+                        프로그램 둘러보기
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-all duration-300">
+                        <i class="fas fa-calendar-check mr-2"></i>
+                        예약하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로그램 필터 및 검색 섹션 -->
+    <section id="programs" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 섹션 타이틀 -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    체험 프로그램 둘러보기
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    목포의 문화, 자연, 역사, 음식을 새로운 방식으로 체험하세요
+                </p>
+            </div>
+
+            <!-- 검색 바 -->
+            <div class="mb-8">
+                <div class="max-w-md mx-auto relative">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="프로그램 검색..." 
+                        class="w-full px-4 py-3 pl-12 pr-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mokpo-blue focus:border-transparent outline-none"
+                    >
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- 프로그램 카테고리 필터 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-3 rounded-full text-white font-semibold transition-all" data-category="all">
+                    <i class="fas fa-th-large mr-2"></i>전체 보기
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full text-gray-700 font-semibold hover:bg-gray-300 transition-all" data-category="food">
+                    <i class="fas fa-utensils mr-2"></i>음식 체험
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full text-gray-700 font-semibold hover:bg-gray-300 transition-all" data-category="culture">
+                    <i class="fas fa-theater-masks mr-2"></i>문화 체험
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full text-gray-700 font-semibold hover:bg-gray-300 transition-all" data-category="nature">
+                    <i class="fas fa-mountain mr-2"></i>자연 체험
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full text-gray-700 font-semibold hover:bg-gray-300 transition-all" data-category="tech">
+                    <i class="fas fa-microchip mr-2"></i>기술 체험
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full text-gray-700 font-semibold hover:bg-gray-300 transition-all" data-category="art">
+                    <i class="fas fa-palette mr-2"></i>예술 체험
+                </button>
+            </div>
+
+            <!-- 정렬 옵션 -->
+            <div class="flex justify-between items-center mb-8">
+                <div class="text-gray-600">
+                    <span id="programCount">24</span>개의 프로그램
+                </div>
+                <div class="flex items-center space-x-4">
+                    <label class="text-gray-600">정렬:</label>
+                    <select id="sortSelect" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-mokpo-blue focus:border-transparent">
+                        <option value="popular">인기순</option>
+                        <option value="rating">평점순</option>
+                        <option value="price-low">가격 낮은순</option>
+                        <option value="price-high">가격 높은순</option>
+                        <option value="duration">소요시간순</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 체험 프로그램 그리드 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="programGrid">
+                <!-- 1. 목포 9미 체험 -->
+                <div class="program-card bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+                     data-category="food" data-rating="4.8" data-price="80000" data-duration="240" onclick="openProgramModal('nineFlavors')">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center card-image">
+                            <i class="fas fa-utensils text-white text-6xl"></i>
+                        </div>
+                        <div class="badge text-red-600">
+                            #1 인기
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                            3-4시간
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">목포 9미(九味) 체험</h3>
+                            <div class="flex items-center star-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1 text-gray-600">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            세발낙지부터 홍어삼합까지, 목포 대표 음식 9가지를 직접 만들고 맛보는 종합 체험
+                        </p>
+                        <div class="space-y-2 text-xs text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>4-8명</span>
+                                <i class="fas fa-won-sign ml-4 mr-2"></i>
+                                <span class="text-lg font-bold text-mokpo-blue">8만원/인</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-red-100 text-red-600 rounded text-xs">#세발낙지</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-600 rounded text-xs">#홍어삼합</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-600 rounded text-xs">#전통과자</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-mokpo-blue text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-mokpo-navy transition-colors">
+                                자세히 보기
+                            </button>
+                            <button class="px-4 py-2 border border-mokpo-blue text-mokpo-blue rounded-lg text-sm hover:bg-mokpo-blue hover:text-white transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. VR 근대역사 체험 -->
+                <div class="program-card bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+                     data-category="tech culture" data-rating="4.7" data-price="50000" data-duration="120" onclick="openProgramModal('vrHistory')">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center card-image">
+                            <i class="fas fa-vr-cardboard text-white text-6xl"></i>
+                        </div>
+                        <div class="badge text-blue-600">
+                            최신 기술
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                            2시간
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">VR 근대역사 몰입 체험</h3>
+                            <div class="flex items-center star-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1 text-gray-600">4.7</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            첨단 VR/AR 기술로 1900년대 목포로 시간여행하며 역사를 체험하는 특별한 프로그램
+                        </p>
+                        <div class="space-y-2 text-xs text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>2-6명</span>
+                                <i class="fas fa-won-sign ml-4 mr-2"></i>
+                                <span class="text-lg font-bold text-mokpo-blue">5만원/인</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">#VR체험</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">#근대역사</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">#시간여행</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-mokpo-blue text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-mokpo-navy transition-colors">
+                                자세히 보기
+                            </button>
+                            <button class="px-4 py-2 border border-mokpo-blue text-mokpo-blue rounded-lg text-sm hover:bg-mokpo-blue hover:text-white transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 다도해 해양 모험 -->
+                <div class="program-card bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+                     data-category="nature" data-rating="4.6" data-price="120000" data-duration="480" onclick="openProgramModal('seaAdventure')">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center card-image">
+                            <i class="fas fa-ship text-white text-6xl"></i>
+                        </div>
+                        <div class="badge text-green-600">
+                            계절한정
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                            1일
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">다도해 해양 모험</h3>
+                            <div class="flex items-center star-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1 text-gray-600">4.6</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            목포만의 특별한 지리적 위치를 활용한 섬 체험과 해양 활동의 완벽한 조합
+                        </p>
+                        <div class="space-y-2 text-xs text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>6-15명</span>
+                                <i class="fas fa-won-sign ml-4 mr-2"></i>
+                                <span class="text-lg font-bold text-mokpo-blue">12만원/인</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-xs">#무인도</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-xs">#어업체험</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-xs">#크루즈</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-mokpo-blue text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-mokpo-navy transition-colors">
+                                자세히 보기
+                            </button>
+                            <button class="px-4 py-2 border border-mokpo-blue text-mokpo-blue rounded-lg text-sm hover:bg-mokpo-blue hover:text-white transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 목포 예술 창작 체험 -->
+                <div class="program-card bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+                     data-category="art culture" data-rating="4.9" data-price="60000" data-duration="360" onclick="openProgramModal('artCreation')">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center card-image">
+                            <i class="fas fa-palette text-white text-6xl"></i>
+                        </div>
+                        <div class="badge text-purple-600">
+                            창작체험
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                            3-6시간
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">목포 예술 창작 체험</h3>
+                            <div class="flex items-center star-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1 text-gray-600">4.9</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            지역 청년 예술가들과 함께하는 창작 활동으로 목포의 예술혼을 체험
+                        </p>
+                        <div class="space-y-2 text-xs text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>4-10명</span>
+                                <i class="fas fa-won-sign ml-4 mr-2"></i>
+                                <span class="text-lg font-bold text-mokpo-blue">6만원/인</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">#벽화</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">#음악</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">#도자기</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-mokpo-blue text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-mokpo-navy transition-colors">
+                                자세히 보기
+                            </button>
+                            <button class="px-4 py-2 border border-mokpo-blue text-mokpo-blue rounded-lg text-sm hover:bg-mokpo-blue hover:text-white transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 유달산 자연 힐링 -->
+                <div class="program-card bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+                     data-category="nature" data-rating="4.8" data-price="70000" data-duration="300" onclick="openProgramModal('yudalHealing')">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center card-image">
+                            <i class="fas fa-mountain text-white text-6xl"></i>
+                        </div>
+                        <div class="badge text-yellow-600">
+                            힐링체험
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                            반일
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">유달산 자연 힐링</h3>
+                            <div class="flex items-center star-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1 text-gray-600">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            목포의 상징 유달산에서 자연과 하나되어 몸과 마음을 치유하는 프로그램
+                        </p>
+                        <div class="space-y-2 text-xs text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>3-12명</span>
+                                <i class="fas fa-won-sign ml-4 mr-2"></i>
+                                <span class="text-lg font-bold text-mokpo-blue">7만원/인</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-xs">#요가</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-xs">#명상</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-xs">#힐링</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-mokpo-blue text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-mokpo-navy transition-colors">
+                                자세히 보기
+                            </button>
+                            <button class="px-4 py-2 border border-mokpo-blue text-mokpo-blue rounded-lg text-sm hover:bg-mokpo-blue hover:text-white transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 목포 스토리텔링 투어 -->
+                <div class="program-card bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+                     data-category="culture" data-rating="4.5" data-price="40000" data-duration="180" onclick="openProgramModal('storytelling')">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center card-image">
+                            <i class="fas fa-book-open text-white text-6xl"></i>
+                        </div>
+                        <div class="badge text-pink-600">
+                            문화투어
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                            2-3시간
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">목포 스토리텔링 투어</h3>
+                            <div class="flex items-center star-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1 text-gray-600">4.5</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            청년 크리에이터들이 전하는 목포의 숨겨진 이야기와 특별한 순간들
+                        </p>
+                        <div class="space-y-2 text-xs text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>4-12명</span>
+                                <i class="fas fa-won-sign ml-4 mr-2"></i>
+                                <span class="text-lg font-bold text-mokpo-blue">4만원/인</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">#스토리</span>
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">#탐방</span>
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">#인물</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-mokpo-blue text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-mokpo-navy transition-colors">
+                                자세히 보기
+                            </button>
+                            <button class="px-4 py-2 border border-mokpo-blue text-mokpo-blue rounded-lg text-sm hover:bg-mokpo-blue hover:text-white transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 추가 프로그램들이 더 있을 수 있음을 알리는 플레이스홀더 -->
+                <div class="col-span-full">
+                    <div class="bg-gray-50 rounded-2xl p-8 text-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-plus text-gray-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-600 mb-2">더 많은 프로그램 개발 중</h3>
+                        <p class="text-gray-500 mb-4">
+                            매월 새로운 체험 프로그램이 추가됩니다.<br>
+                            목표는 연중 100가지 이상의 다양한 체험을 제공하는 것입니다.
+                        </p>
+                        <button class="bg-mokpo-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-mokpo-navy transition-colors">
+                            개발 현황 보기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 계절별 프로그램 소개 섹션 -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                    계절별 특화 프로그램
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    연중 내내 목포의 다양한 매력을 경험할 수 있는 계절별 특화 프로그램
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 봄 프로그램 -->
+                <div class="season-spring rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-seedling text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-800 mb-3">봄 (3-5월)</h3>
+                    <ul class="text-sm text-green-700 space-y-1">
+                        <li>🌸 유달산 벚꽃 사생대회</li>
+                        <li>🍃 봄나물 채집 & 요리</li>
+                        <li>🚶 봄 걷기 투어</li>
+                        <li>📸 봄꽃 포토 투어</li>
+                    </ul>
+                </div>
+
+                <!-- 여름 프로그램 -->
+                <div class="season-summer rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-umbrella-beach text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-800 mb-3">여름 (6-8월)</h3>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>🏊 해양 스포츠 체험</li>
+                        <li>🎣 바다낚시 체험</li>
+                        <li>🌅 일출 요가 클래스</li>
+                        <li>🍦 시원한 디저트 만들기</li>
+                    </ul>
+                </div>
+
+                <!-- 가을 프로그램 -->
+                <div class="season-autumn rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-leaf text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-orange-800 mb-3">가을 (9-11월)</h3>
+                    <ul class="text-sm text-orange-700 space-y-1">
+                        <li>🍂 단풍 감상 트레킹</li>
+                        <li>🌰 가을 수확 체험</li>
+                        <li>🍷 전통주 만들기</li>
+                        <li>🖼️ 가을 풍경화 그리기</li>
+                    </ul>
+                </div>
+
+                <!-- 겨울 프로그램 -->
+                <div class="season-winter rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-snowflake text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-3">겨울 (12-2월)</h3>
+                    <ul class="text-sm text-indigo-700 space-y-1">
+                        <li>🔥 전통 난로 체험</li>
+                        <li>🍲 따뜻한 향토 요리</li>
+                        <li>☕ 겨울 차 만들기</li>
+                        <li>🎭 실내 문화 체험</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA 섹션 -->
+    <section class="py-20 bg-gradient-to-br from-mokpo-navy to-mokpo-blue text-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                지금 바로 체험 예약하세요
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                목포 커넥트 플랫폼에서 원하는 체험을 쉽고 빠르게 예약할 수 있습니다.<br>
+                특별한 목포의 경험이 여러분을 기다리고 있습니다.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-mokpo-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300">
+                    <i class="fas fa-mobile-alt mr-2"></i>
+                    앱 다운로드
+                </button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-mokpo-blue transition-all duration-300">
+                    <i class="fas fa-calendar-check mr-2"></i>
+                    온라인 예약
+                </button>
+                <button class="bg-mokpo-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300">
+                    <i class="fas fa-phone mr-2"></i>
+                    전화 문의
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">목포 커넥트</h3>
+                    <p class="text-gray-400 mb-4">청년이 만드는 목포, 관광객이 발견하는 목포</p>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-facebook text-2xl hover:text-blue-500 cursor-pointer transition-colors"></i>
+                        <i class="fab fa-instagram text-2xl hover:text-pink-500 cursor-pointer transition-colors"></i>
+                        <i class="fab fa-youtube text-2xl hover:text-red-500 cursor-pointer transition-colors"></i>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">바로가기</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">홈</a></li>
+                        <li><a href="problems.html" class="text-gray-400 hover:text-white transition-colors">현황분석</a></li>
+                        <li><a href="solution.html" class="text-gray-400 hover:text-white transition-colors">솔루션</a></li>
+                        <li><a href="implementation.html" class="text-gray-400 hover:text-white transition-colors">추진방안</a></li>
+                        <li><a href="benefits.html" class="text-gray-400 hover:text-white transition-colors">기대효과</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">고객 지원</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">고객센터: 1588-1234</li>
+                        <li class="text-gray-400">이메일: info@mokpoconnect.kr</li>
+                        <li class="text-gray-400">운영시간: 09:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 목포 커넥트. 2025년 목포시 시정발전 정책제안 공모전 출품작
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="enhanced-script.js"></script>
+    <script>
+        // 체험 프로그램 페이지 전용 JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // 스무스 스크롤 함수
+            window.scrollToPrograms = function() {
+                document.getElementById('programs').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            };
+
+            // 프로그램 검색 기능
+            const searchInput = document.getElementById('searchInput');
+            const programCards = document.querySelectorAll('.program-card');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                let visibleCount = 0;
+
+                programCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const tags = Array.from(card.querySelectorAll('.px-2')).map(tag => 
+                        tag.textContent.toLowerCase()
+                    ).join(' ');
+
+                    if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                document.getElementById('programCount').textContent = visibleCount;
+            });
+
+            // 정렬 기능
+            const sortSelect = document.getElementById('sortSelect');
+            const programGrid = document.getElementById('programGrid');
+
+            sortSelect.addEventListener('change', function() {
+                const sortBy = this.value;
+                const cards = Array.from(programCards);
+
+                cards.sort((a, b) => {
+                    switch(sortBy) {
+                        case 'rating':
+                            return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+                        case 'price-low':
+                            return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+                        case 'price-high':
+                            return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+                        case 'duration':
+                            return parseInt(a.dataset.duration) - parseInt(b.dataset.duration);
+                        default: // popular
+                            return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+                    }
+                });
+
+                // 정렬된 순서대로 다시 배치
+                cards.forEach((card, index) => {
+                    card.style.order = index;
+                });
+            });
+
+            // 필터 버튼 개선된 애니메이션
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 모든 버튼에서 active 클래스 제거
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                        btn.classList.remove('text-white');
+                    });
+                    
+                    // 클릭된 버튼에 active 클래스 추가
+                    this.classList.add('active');
+                    this.classList.remove('bg-gray-200', 'text-gray-700');
+                    this.classList.add('text-white');
+
+                    // 필터링 로직 (enhanced-script.js에서 처리)
+                });
+            });
+
+            // 프로그램 카드 호버 효과 향상
+            programCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('.card-image').style.transform = 'scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('.card-image').style.transform = 'scale(1)';
+                });
+            });
+
+            // 관심목록 기능
+            const wishlistButtons = document.querySelectorAll('button i.fas.fa-heart');
+            
+            wishlistButtons.forEach(button => {
+                button.parentElement.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    if (button.classList.contains('fas')) {
+                        button.classList.remove('fas');
+                        button.classList.add('far');
+                        button.style.color = '#6b7280';
+                        
+                        // 토스트 메시지
+                        showToast('관심목록에서 제거되었습니다.', 'info');
+                    } else {
+                        button.classList.remove('far');
+                        button.classList.add('fas');
+                        button.style.color = '#ef4444';
+                        
+                        // 토스트 메시지
+                        showToast('관심목록에 추가되었습니다.', 'success');
+                    }
+                });
+            });
+
+            // 토스트 메시지 함수
+            function showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `fixed top-20 right-4 px-6 py-3 rounded-lg text-white z-50 transition-all duration-300 transform translate-x-full ${
+                    type === 'success' ? 'bg-green-500' : 
+                    type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+                }`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-x-full');
+                }, 100);
+
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300);
+                }, 3000);
+            }
+
+            // 스크롤 애니메이션
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // 모든 프로그램 카드에 observer 적용
+            programCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            console.log('체험 프로그램 페이지가 성공적으로 로드되었습니다!');
+        });
+    </script>
+</body>
+</html>
