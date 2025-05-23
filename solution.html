@@ -3,55 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>솔루션 - 목포 커넥트 플랫폼 구축 및 기술 혁신 | 목포 커넥트</title>
+    <title>솔루션 아키텍처 - Enhanced | 목포 커넥트</title>
     
-    <!-- SEO 메타 태그 -->
-    <meta name="description" content="AI 기반 맞춤형 큐레이션과 블록체인 지역화폐를 활용한 목포 커넥트 플랫폼의 혁신적인 기술 솔루션. 청년 크리에이터 육성부터 IoT 모니터링까지 전체 시스템 설계.">
-    <meta name="keywords" content="목포 커넥트 솔루션, AI 큐레이션, 블록체인 지역화폐, IoT 모니터링, 청년 크리에이터, 플랫폼 구축">
-    <meta name="author" content="목포 커넥트 팀">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="Korean">
-    
-    <!-- Open Graph 메타 태그 -->
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="목포 커넥트 솔루션 - AI와 블록체인 기반 혁신 플랫폼">
-    <meta property="og:description" content="청년 창업가와 관광객을 연결하는 AI 기반 맞춤형 플랫폼과 블록체인 결제 시스템의 상세 구조">
-    <meta property="og:image" content="img/platform-architecture.jpg">
-    <meta property="og:url" content="https://mokpo-connect.or.kr/solution.html">
-    <meta property="og:site_name" content="목포 커넥트">
-    <meta property="og:locale" content="ko_KR">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="목포 커넥트 솔루션 - AI와 블록체인 기반 혁신 플랫폼">
-    <meta name="twitter:description" content="기술 혁신으로 구현하는 청년-관광 융합 플랫폼">
-    <meta name="twitter:image" content="img/platform-architecture.jpg">
-    
-    <!-- 파비콘 -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.svg">
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
-    
-    <!-- 스타일시트 -->
+    <!-- 기존 메타태그들... -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX', {
-            page_title: '목포 커넥트 솔루션',
-            page_location: window.location.href,
-            send_page_view: true
-        });
-    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -62,124 +22,263 @@
                         'mokpo-cyan': '#0891b2',
                         'mokpo-orange': '#ea580c',
                         'mokpo-yellow': '#fbbf24'
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.8s ease-in-out',
-                        'slide-up': 'slideUp 0.6s ease-out',
-                        'float': 'float 3s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'bounce-slow': 'bounce 2s infinite',
-                        'spin-slow': 'spin 3s linear infinite'
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* 3D Architecture Styles */
+        .architecture-3d {
+            perspective: 1000px;
+            perspective-origin: center center;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .tech-stack {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .architecture-diagram {
-            background: radial-gradient(circle at center, #f6f9fc 0%, #e9f2ff 100%);
-        }
-
-        .user-journey {
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-        }
-
-        .scenario-card {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        }
-
-        .interactive-element {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .interactive-element:hover {
-            transform: scale(1.05);
-        }
-
-        .connection-line {
-            stroke: #2563eb;
-            stroke-width: 2;
-            stroke-dasharray: 5,5;
-            animation: dash 2s linear infinite;
-        }
-
-        @keyframes dash {
-            to {
-                stroke-dashoffset: -10;
-            }
-        }
-
-        .tech-icon {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .tech-icon:hover {
-            transform: rotate(360deg) scale(1.1);
-            box-shadow: 0 10px 30px rgba(103, 126, 234, 0.3);
-        }
-
-        .platform-layer {
+        .layer-card {
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 20px;
-            padding: 20px;
-            margin: 10px 0;
+            padding: 25px;
+            margin: 15px 0;
             color: white;
             position: relative;
             overflow: hidden;
         }
-
-        .platform-layer::before {
+        
+        .layer-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.8s;
+        }
+        
+        .layer-card:hover::before {
+            left: 100%;
+        }
+        
+        .layer-card:hover {
+            transform: rotateY(15deg) translateZ(30px);
+            box-shadow: 0 30px 60px rgba(103, 126, 234, 0.4);
+        }
+        
+        .layer-card:nth-child(1) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .layer-card:nth-child(2) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .layer-card:nth-child(3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .layer-card:nth-child(4) { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .layer-card:nth-child(5) { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        
+        /* Data Flow Animation */
+        .data-flow {
+            position: relative;
+            height: 400px;
+            background: radial-gradient(ellipse at center, #f6f9fc 0%, #e9f2ff 100%);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        
+        .data-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .data-node:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+        
+        .data-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #2563eb;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        
+        /* Tech Stack Integration */
+        .tech-integration {
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            border-radius: 25px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-hexagon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 20px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .tech-hexagon:hover {
+            transform: rotate(60deg) scale(1.1);
+            box-shadow: 0 0 40px rgba(103, 126, 234, 0.6);
+        }
+        
+        .tech-hexagon::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: inherit;
+            clip-path: inherit;
+            filter: blur(20px);
+            opacity: 0.7;
+        }
+        
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
+            background-size: 200% 100%;
+            animation: flowAnimation 3s linear infinite;
+        }
+        
+        @keyframes flowAnimation {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* System Components Map */
+        .component-map {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            border-radius: 25px;
+            padding: 40px;
+            position: relative;
+            min-height: 500px;
+        }
+        
+        .component-item {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .component-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Real-time Simulation */
+        .simulation-dashboard {
+            background: #000;
+            border-radius: 25px;
+            padding: 30px;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .simulation-dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 100, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .console-line {
+            margin: 5px 0;
+            opacity: 0;
+            animation: typewriter 0.5s ease-in-out forwards;
+        }
+        
+        @keyframes typewriter {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .metric-card {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        /* Interactive buttons */
+        .arch-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            font-weight: 600;
+        }
+        
+        .arch-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(103, 126, 234, 0.4);
+        }
+        
+        .arch-button.active {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
         }
 
-        .platform-layer:hover::before {
-            left: 100%;
+        /* 탭 전환 기능 */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* 사용자 여정 스타일 */
+        .user-journey {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
         }
 
         .journey-step {
@@ -210,36 +309,18 @@
             box-shadow: 0 0 0 5px white, 0 0 0 10px #2563eb;
         }
 
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .tab-button {
+        .card-hover {
             transition: all 0.3s ease;
         }
-
-        .tab-button.active {
-            background: #2563eb;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-        }
-
-        /* 반응형 */
-        @media (max-width: 768px) {
-            .side-menu {
-                display: none;
-            }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
-    <!-- 네비게이션 바 -->
+<body class="bg-gray-50 text-gray-800">
+    <!-- 네비게이션 바 (기존과 동일) -->
     <nav class="bg-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -254,39 +335,8 @@
                         <a href="programs.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">체험프로그램</a>
                         <a href="implementation.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">추진방안</a>
                         <a href="benefits.html" class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">기대효과</a>
-                        <div class="relative group">
-                            <button class="text-gray-700 hover:text-mokpo-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                                분석자료 <i class="fas fa-chevron-down ml-1"></i>
-                            </button>
-                            <div class="absolute right-0 w-48 mt-2 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                <a href="trend-analysis.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">트렌드 분석</a>
-                                <a href="youth-statistics.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">청년 현황</a>
-                                <a href="benchmarking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">벤치마킹</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <!-- 모바일 메뉴 버튼 -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="bg-gray-100 p-2 rounded-md">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- 모바일 메뉴 -->
-        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">홈</a>
-                <a href="problems.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">현황분석</a>
-                <a href="solution.html" class="block px-3 py-2 text-mokpo-blue bg-mokpo-blue bg-opacity-10 rounded-md">솔루션</a>
-                <a href="programs.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">체험프로그램</a>
-                <a href="implementation.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">추진방안</a>
-                <a href="benefits.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">기대효과</a>
-                <hr class="my-2">
-                <a href="trend-analysis.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">트렌드 분석</a>
-                <a href="youth-statistics.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">청년 현황</a>
-                <a href="benchmarking.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">벤치마킹</a>
             </div>
         </div>
     </nav>
@@ -294,160 +344,708 @@
     <!-- 히어로 섹션 -->
     <section class="bg-gradient-to-br from-mokpo-blue via-mokpo-cyan to-blue-600 text-white py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center animate-fade-in">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                    목포 커넥트 <span class="text-mokpo-yellow">솔루션</span>
+            <div class="text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    Enhanced <span class="text-mokpo-yellow">Architecture</span>
                 </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-                    기술과 창의성이 만나 만드는 혁신적인 청년-관광 융합 플랫폼<br>
-                    데이터 기반 설계로 검증된 지속가능한 성장 모델
+                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto">
+                    차세대 기술로 구현하는 혁신적인 청년-관광 융합 플랫폼
                 </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3 backdrop-blur-sm">
-                        <div class="text-2xl font-bold">AI 기반</div>
-                        <div class="text-sm">맞춤형 큐레이션</div>
+                <div class="flex justify-center space-x-4">
+                    <button class="arch-button active" data-view="layer">레이어 구조</button>
+                    <button class="arch-button" data-view="flow">데이터 흐름</button>
+                    <button class="arch-button" data-view="tech">기술 통합</button>
+                    <button class="arch-button" data-view="components">컴포넌트</button>
+                    <button class="arch-button" data-view="simulation">실시간 시뮬레이션</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 아키텍처 섹션 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- 3D 레이어 구조 (기본 표시) -->
+            <div id="layer-view" class="architecture-view">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                        시스템 레이어 아키텍처
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        계층적 구조로 설계된 확장 가능한 플랫폼 아키텍처
+                    </p>
+                </div>
+
+                <div class="architecture-3d max-w-5xl mx-auto">
+                    <div class="layer-card" data-layer="presentation">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">
+                                    <i class="fas fa-mobile-alt mr-3"></i>프레젠테이션 레이어
+                                </h3>
+                                <p class="text-sm opacity-90">사용자 인터페이스 및 사용자 경험</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs opacity-75 mb-1">기술 스택</div>
+                                <div class="flex space-x-2">
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">React Native</span>
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Progressive Web App</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-4 gap-4 text-sm">
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-mobile text-lg mb-2"></i>
+                                <div>모바일 앱</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-desktop text-lg mb-2"></i>
+                                <div>웹 포털</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-tablet text-lg mb-2"></i>
+                                <div>관리자 대시보드</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-tv text-lg mb-2"></i>
+                                <div>키오스크</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3 backdrop-blur-sm">
-                        <div class="text-2xl font-bold">블록체인</div>
-                        <div class="text-sm">지역화폐 연동</div>
+
+                    <div class="layer-card" data-layer="api">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">
+                                    <i class="fas fa-plug mr-3"></i>API 게이트웨이 레이어
+                                </h3>
+                                <p class="text-sm opacity-90">API 관리, 인증 및 라우팅</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs opacity-75 mb-1">기술 스택</div>
+                                <div class="flex space-x-2">
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Kong Gateway</span>
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">OAuth 2.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-4 gap-4 text-sm">
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-shield-alt text-lg mb-2"></i>
+                                <div>인증/권한</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-tachometer-alt text-lg mb-2"></i>
+                                <div>Rate Limiting</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-route text-lg mb-2"></i>
+                                <div>라우팅</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-chart-line text-lg mb-2"></i>
+                                <div>모니터링</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3 backdrop-blur-sm">
-                        <div class="text-2xl font-bold">IoT 통합</div>
-                        <div class="text-sm">실시간 모니터링</div>
+
+                    <div class="layer-card" data-layer="business">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">
+                                    <i class="fas fa-cogs mr-3"></i>비즈니스 로직 레이어
+                                </h3>
+                                <p class="text-sm opacity-90">핵심 비즈니스 프로세스 및 알고리즘</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs opacity-75 mb-1">기술 스택</div>
+                                <div class="flex space-x-2">
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Node.js</span>
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Python/Django</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-4 gap-4 text-sm">
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-brain text-lg mb-2"></i>
+                                <div>AI 추천 엔진</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-users text-lg mb-2"></i>
+                                <div>매칭 시스템</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-credit-card text-lg mb-2"></i>
+                                <div>결제 처리</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-bell text-lg mb-2"></i>
+                                <div>알림 서비스</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layer-card" data-layer="integration">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">
+                                    <i class="fas fa-network-wired mr-3"></i>통합 서비스 레이어
+                                </h3>
+                                <p class="text-sm opacity-90">외부 시스템 및 서비스 연동</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs opacity-75 mb-1">기술 스택</div>
+                                <div class="flex space-x-2">
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Apache Kafka</span>
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">REST/GraphQL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-4 gap-4 text-sm">
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-cube text-lg mb-2"></i>
+                                <div>블록체인 API</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-satellite-dish text-lg mb-2"></i>
+                                <div>IoT 게이트웨이</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-map text-lg mb-2"></i>
+                                <div>지도/위치 서비스</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-comments text-lg mb-2"></i>
+                                <div>소셜 미디어</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layer-card" data-layer="data">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">
+                                    <i class="fas fa-database mr-3"></i>데이터 레이어
+                                </h3>
+                                <p class="text-sm opacity-90">데이터 저장, 관리 및 보안</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs opacity-75 mb-1">기술 스택</div>
+                                <div class="flex space-x-2">
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">PostgreSQL</span>
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Redis</span>
+                                    <span class="bg-white bg-opacity-20 px-2 py-1 rounded text-xs">Elasticsearch</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-4 gap-4 text-sm">
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-server text-lg mb-2"></i>
+                                <div>주 데이터베이스</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-bolt text-lg mb-2"></i>
+                                <div>캐시 시스템</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-search text-lg mb-2"></i>
+                                <div>검색 엔진</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 p-3 rounded">
+                                <i class="fas fa-cloud text-lg mb-2"></i>
+                                <div>클라우드 스토리지</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 데이터 흐름도 -->
+            <div id="flow-view" class="architecture-view hidden">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                        실시간 데이터 흐름
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        시스템 내 데이터의 실시간 흐름과 처리 과정
+                    </p>
+                </div>
+
+                <div class="data-flow">
+                    <!-- 데이터 노드들 -->
+                    <div class="data-node" style="top: 50px; left: 80px; background: #3b82f6;" data-info="user-input">
+                        <div class="text-center">
+                            <i class="fas fa-user text-xl"></i>
+                            <div class="text-xs mt-1">사용자 입력</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-node" style="top: 50px; right: 80px; background: #10b981;" data-info="ai-processing">
+                        <div class="text-center">
+                            <i class="fas fa-brain text-xl"></i>
+                            <div class="text-xs mt-1">AI 분석</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-node" style="top: 180px; left: 50%; transform: translateX(-50%); background: #8b5cf6;" data-info="matching-engine">
+                        <div class="text-center">
+                            <i class="fas fa-link text-xl"></i>
+                            <div class="text-xs mt-1">매칭 엔진</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-node" style="bottom: 50px; left: 80px; background: #f59e0b;" data-info="blockchain">
+                        <div class="text-center">
+                            <i class="fas fa-cube text-xl"></i>
+                            <div class="text-xs mt-1">블록체인 결제</div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-node" style="bottom: 50px; right: 80px; background: #ef4444;" data-info="iot-sensors">
+                        <div class="text-center">
+                            <i class="fas fa-satellite-dish text-xl"></i>
+                            <div class="text-xs mt-1">IoT 센서</div>
+                        </div>
+                    </div>
+
+                    <!-- 의미있는 연결선들 -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 400">
+                        <!-- 1. 사용자 입력 → AI 분석 -->
+                        <path d="M 160 90 Q 400 60 640 90" stroke="#3b82f6" stroke-width="3" fill="none" stroke-dasharray="8,4" opacity="0.8">
+                            <animate attributeName="stroke-dashoffset" values="0;-12" dur="2s" repeatCount="indefinite"/>
+                        </path>
+                        
+                        <!-- 2. AI 분석 → 매칭 엔진 -->
+                        <path d="M 640 130 Q 550 160 440 220" stroke="#10b981" stroke-width="3" fill="none" stroke-dasharray="8,4" opacity="0.8">
+                            <animate attributeName="stroke-dashoffset" values="0;-12" dur="2.2s" repeatCount="indefinite"/>
+                        </path>
+                        
+                        <!-- 3. 사용자 입력 → 매칭 엔진 (직접 경로) -->
+                        <path d="M 160 130 Q 300 180 360 220" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6,3" opacity="0.6">
+                            <animate attributeName="stroke-dashoffset" values="0;-9" dur="2.4s" repeatCount="indefinite"/>
+                        </path>
+                        
+                        <!-- 4. 매칭 엔진 → 블록체인 결제 -->
+                        <path d="M 360 260 Q 260 310 160 310" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-dasharray="8,4" opacity="0.8">
+                            <animate attributeName="stroke-dashoffset" values="0;-12" dur="1.8s" repeatCount="indefinite"/>
+                        </path>
+                        
+                        <!-- 5. IoT 센서 → 매칭 엔진 (피드백) -->
+                        <path d="M 640 310 Q 550 280 440 260" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="8,4" opacity="0.8">
+                            <animate attributeName="stroke-dashoffset" values="0;-12" dur="2.6s" repeatCount="indefinite"/>
+                        </path>
+                        
+                        <!-- 화살표 마커 정의 -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" opacity="0.7"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- 화살표들 -->
+                        <circle cx="500" cy="75" r="3" fill="#3b82f6" opacity="0.7">
+                            <animate attributeName="cx" values="160;640" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="540" cy="175" r="3" fill="#10b981" opacity="0.7">
+                            <animate attributeName="cx" values="640;440" dur="2.2s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="130;220" dur="2.2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="260" cy="285" r="3" fill="#8b5cf6" opacity="0.7">
+                            <animate attributeName="cx" values="360;160" dur="1.8s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="260;310" dur="1.8s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="540" cy="285" r="3" fill="#ef4444" opacity="0.7">
+                            <animate attributeName="cx" values="640;440" dur="2.6s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="310;260" dur="2.6s" repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
+
+                    <!-- 데이터 흐름 단계 표시 - 매칭엔진 아래 -->
+                    <div class="absolute top-72 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white p-3 rounded-lg text-sm backdrop-blur-sm border border-gray-600 shadow-xl">
+                        <h4 class="font-bold mb-2 text-green-400 flex items-center justify-center">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            실시간 데이터 흐름
+                        </h4>
+                        <div class="space-y-1 text-xs">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
+                                <span>1. 사용자 요청 → AI 분석</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" style="animation-delay: 0.5s;"></div>
+                                <span>2. AI 결과 → 매칭 엔진</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-2 animate-pulse" style="animation-delay: 1s;"></div>
+                                <span>3. 매칭 완료 → 블록체인 결제</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse" style="animation-delay: 1.5s;"></div>
+                                <span>4. IoT 센서 → 실시간 피드백</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 데이터 흐름 상세 정보 -->
+                <div id="flow-details" class="mt-8 p-6 bg-gray-100 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4">데이터 흐름 상세</h3>
+                    <div id="flow-detail-content">
+                        <p class="text-gray-600">노드를 클릭하여 상세 정보를 확인하세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 기술 통합 아키텍처 -->
+            <div id="tech-view" class="architecture-view hidden">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                        기술 스택 통합 아키텍처
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        각 기술 요소들의 유기적 통합과 상호작용
+                    </p>
+                </div>
+
+                <div class="tech-integration">
+                    <div class="flex flex-wrap justify-center items-center">
+                        <div class="tech-hexagon" data-tech="ai">
+                            <div class="text-center text-white z-10 relative">
+                                <i class="fas fa-brain text-3xl mb-2"></i>
+                                <div class="text-sm font-bold">AI/ML</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-hexagon" data-tech="blockchain" style="margin-top: -20px;">
+                            <div class="text-center text-white z-10 relative">
+                                <i class="fas fa-cube text-3xl mb-2"></i>
+                                <div class="text-sm font-bold">Blockchain</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-hexagon" data-tech="iot">
+                            <div class="text-center text-white z-10 relative">
+                                <i class="fas fa-satellite-dish text-3xl mb-2"></i>
+                                <div class="text-sm font-bold">IoT</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-hexagon" data-tech="cloud" style="margin-top: -20px;">
+                            <div class="text-center text-white z-10 relative">
+                                <i class="fas fa-cloud text-3xl mb-2"></i>
+                                <div class="text-sm font-bold">Cloud</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-hexagon" data-tech="mobile">
+                            <div class="text-center text-white z-10 relative">
+                                <i class="fas fa-mobile-alt text-3xl mb-2"></i>
+                                <div class="text-sm font-bold">Mobile</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 기술 연결선들 -->
+                    <div class="connection-line" style="top: 150px; left: 200px; width: 150px; transform: rotate(30deg);"></div>
+                    <div class="connection-line" style="top: 150px; right: 200px; width: 150px; transform: rotate(-30deg);"></div>
+                    <div class="connection-line" style="bottom: 150px; left: 200px; width: 150px; transform: rotate(-30deg);"></div>
+                    <div class="connection-line" style="bottom: 150px; right: 200px; width: 150px; transform: rotate(30deg);"></div>
+                </div>
+
+                <!-- 기술 상세 정보 -->
+                <div id="tech-details" class="mt-8 p-6 bg-white rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">기술 상세 정보</h3>
+                    <div id="tech-detail-content">
+                        <p class="text-gray-600">기술 요소를 클릭하여 상세 정보를 확인하세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 시스템 컴포넌트 맵 -->
+            <div id="components-view" class="architecture-view hidden">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                        시스템 컴포넌트 맵
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        각 컴포넌트의 역할과 상호 의존성
+                    </p>
+                </div>
+
+                <div class="component-map">
+                    <!-- 상단 좌측: 사용자 관리 -->
+                    <div class="component-item" style="top: 30px; left: 30px; width: 180px;" data-component="user-management">
+                        <h4 class="text-white font-bold mb-2">
+                            <i class="fas fa-users mr-2"></i>사용자 관리
+                        </h4>
+                        <p class="text-gray-300 text-sm">회원가입, 로그인, 프로필 관리</p>
+                        <div class="mt-2 text-xs text-gray-400">
+                            API: /api/users/*
+                        </div>
+                    </div>
+
+                    <!-- 상단 우측: 추천 시스템 -->
+                    <div class="component-item" style="top: 30px; right: 30px; width: 180px;" data-component="recommendation">
+                        <h4 class="text-white font-bold mb-2">
+                            <i class="fas fa-brain mr-2"></i>추천 시스템
+                        </h4>
+                        <p class="text-gray-300 text-sm">AI 기반 개인화 추천</p>
+                        <div class="mt-2 text-xs text-gray-400">
+                            API: /api/recommendations/*
+                        </div>
+                    </div>
+
+                    <!-- 상단 중앙: 예약 시스템 -->
+                    <div class="component-item" style="top: 30px; left: 50%; transform: translateX(-50%); width: 180px;" data-component="booking">
+                        <h4 class="text-white font-bold mb-2">
+                            <i class="fas fa-calendar-check mr-2"></i>예약 시스템
+                        </h4>
+                        <p class="text-gray-300 text-sm">실시간 예약, 일정 관리</p>
+                        <div class="mt-2 text-xs text-gray-400">
+                            API: /api/bookings/*
+                        </div>
+                    </div>
+
+                    <!-- 하단 좌측: 결제 시스템 -->
+                    <div class="component-item" style="bottom: 30px; left: 30px; width: 180px;" data-component="payment">
+                        <h4 class="text-white font-bold mb-2">
+                            <i class="fas fa-credit-card mr-2"></i>결제 시스템
+                        </h4>
+                        <p class="text-gray-300 text-sm">목포페이 연동 결제</p>
+                        <div class="mt-2 text-xs text-gray-400">
+                            API: /api/payments/*
+                        </div>
+                    </div>
+
+                    <!-- 하단 우측: 모니터링 -->
+                    <div class="component-item" style="bottom: 30px; right: 30px; width: 180px;" data-component="monitoring">
+                        <h4 class="text-white font-bold mb-2">
+                            <i class="fas fa-chart-line mr-2"></i>모니터링
+                        </h4>
+                        <p class="text-gray-300 text-sm">실시간 성능 모니터링</p>
+                        <div class="mt-2 text-xs text-gray-400">
+                            API: /api/analytics/*
+                        </div>
+                    </div>
+
+                    <!-- 중앙: 코어 엔진 (원형) -->
+                    <div class="component-item" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; border-radius: 50%; z-index: 10;" data-component="core">
+                        <div class="h-full flex flex-col justify-center text-center">
+                            <h4 class="text-white font-bold mb-2">
+                                <i class="fas fa-network-wired text-xl"></i>
+                            </h4>
+                            <div class="text-white font-bold text-sm">코어 엔진</div>
+                            <p class="text-gray-300 text-xs mt-1">중앙 제어</p>
+                        </div>
+                    </div>
+
+                    <!-- 연결선들을 위한 SVG -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
+                        <!-- 중앙에서 각 컴포넌트로의 연결선 -->
+                        <line x1="50%" y1="50%" x2="120" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-10" dur="2s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="50%" y1="50%" x2="calc(100% - 120px)" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-10" dur="2.2s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="50%" y1="50%" x2="50%" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-10" dur="1.8s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="50%" y1="50%" x2="120" y2="calc(100% - 120px)" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-10" dur="2.4s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="50%" y1="50%" x2="calc(100% - 120px)" y2="calc(100% - 120px)" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-10" dur="2.6s" repeatCount="indefinite"/>
+                        </line>
+                    </svg>
+                </div>
+
+                <!-- 컴포넌트 상세 정보 -->
+                <div id="component-details" class="mt-8 p-6 bg-white rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">컴포넌트 상세</h3>
+                    <div id="component-detail-content">
+                        <p class="text-gray-600">컴포넌트를 클릭하여 상세 정보를 확인하세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 실시간 시뮬레이션 -->
+            <div id="simulation-view" class="architecture-view hidden">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
+                        실시간 시스템 시뮬레이션
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        라이브 시스템 성능 및 사용자 활동 모니터링
+                    </p>
+                </div>
+
+                <div class="simulation-dashboard">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-white">
+                                <i class="fas fa-terminal mr-2"></i>시스템 로그
+                            </h3>
+                            <div id="console-output" class="h-64 overflow-y-auto">
+                                <!-- 동적으로 추가될 로그들 -->
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-white">
+                                <i class="fas fa-chart-bar mr-2"></i>실시간 메트릭
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="metric-card">
+                                    <div class="flex justify-between items-center">
+                                        <span>활성 사용자</span>
+                                        <span id="active-users" class="font-bold">1,247</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                                        <div id="users-bar" class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <div class="flex justify-between items-center">
+                                        <span>API 요청/초</span>
+                                        <span id="api-requests" class="font-bold">342</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                                        <div id="api-bar" class="bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <div class="flex justify-between items-center">
+                                        <span>응답시간 (ms)</span>
+                                        <span id="response-time" class="font-bold">23</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                                        <div id="response-bar" class="bg-yellow-500 h-2 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <div class="flex justify-between items-center">
+                                        <span>AI 추천 정확도</span>
+                                        <span id="ai-accuracy" class="font-bold">94.2%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                                        <div id="accuracy-bar" class="bg-green-500 h-2 rounded-full" style="width: 94%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex justify-center space-x-4">
+                        <button id="start-simulation" class="arch-button">
+                            <i class="fas fa-play mr-2"></i>시뮬레이션 시작
+                        </button>
+                        <button id="stop-simulation" class="arch-button">
+                            <i class="fas fa-stop mr-2"></i>시뮬레이션 중지
+                        </button>
+                        <button id="reset-simulation" class="arch-button">
+                            <i class="fas fa-redo mr-2"></i>리셋
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 솔루션 개념도 섹션 -->
-    <section class="py-20 bg-white">
+    <!-- 통계 및 성능 지표 -->
+    <section class="py-20 bg-gradient-to-br from-mokpo-navy to-mokpo-blue text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-mokpo-navy mb-6">
-                    솔루션 아키텍처
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    아키텍처 성능 지표
                 </h2>
-                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    모든 구성요소가 유기적으로 연결된 통합 생태계
+                <p class="text-xl opacity-90 max-w-4xl mx-auto">
+                    설계된 시스템의 예상 성능과 확장성 지표
                 </p>
             </div>
 
-            <!-- 인터랙티브 아키텍처 다이어그램 -->
-            <div class="architecture-diagram rounded-3xl p-8 mb-16">
-                <div class="relative min-h-96">
-                    <!-- 중앙 플랫폼 -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <div class="w-64 h-64 platform-layer interactive-element" onclick="showDetail('platform')">
-                            <div class="text-center h-full flex flex-col justify-center">
-                                <i class="fas fa-network-wired text-4xl mb-3"></i>
-                                <div class="text-xl font-bold">목포 커넥트</div>
-                                <div class="text-sm opacity-90">통합 플랫폼</div>
-                            </div>
-                        </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="text-center">
+                        <i class="fas fa-users text-4xl text-mokpo-yellow mb-4"></i>
+                        <div class="text-3xl font-bold mb-2">10,000+</div>
+                        <div class="text-sm opacity-90">동시 접속 사용자</div>
+                        <div class="text-xs opacity-75 mt-2">Load Balancer 분산 처리</div>
                     </div>
-
-                    <!-- 주요 구성요소들 -->
-                    <div class="absolute top-10 left-10">
-                        <div class="w-32 h-32 bg-blue-500 rounded-full flex items-center justify-center interactive-element card-hover" onclick="showDetail('youth')">
-                            <div class="text-center text-white">
-                                <i class="fas fa-user-graduate text-2xl mb-2"></i>
-                                <div class="text-sm font-semibold">청년 창업가</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="absolute top-10 right-10">
-                        <div class="w-32 h-32 bg-green-500 rounded-full flex items-center justify-center interactive-element card-hover" onclick="showDetail('tourist')">
-                            <div class="text-center text-white">
-                                <i class="fas fa-plane text-2xl mb-2"></i>
-                                <div class="text-sm font-semibold">관광객</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="absolute bottom-10 left-10">
-                        <div class="w-32 h-32 bg-purple-500 rounded-full flex items-center justify-center interactive-element card-hover" onclick="showDetail('local')">
-                            <div class="text-center text-white">
-                                <i class="fas fa-store text-2xl mb-2"></i>
-                                <div class="text-sm font-semibold">지역상인</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="absolute bottom-10 right-10">
-                        <div class="w-32 h-32 bg-orange-500 rounded-full flex items-center justify-center interactive-element card-hover" onclick="showDetail('city')">
-                            <div class="text-center text-white">
-                                <i class="fas fa-building text-2xl mb-2"></i>
-                                <div class="text-sm font-semibold">목포시</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 연결선 -->
-                    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
-                        <line class="connection-line" x1="20" y1="20" x2="50" y2="50"/>
-                        <line class="connection-line" x1="80" y1="20" x2="50" y2="50"/>
-                        <line class="connection-line" x1="20" y1="80" x2="50" y2="50"/>
-                        <line class="connection-line" x1="80" y1="80" x2="50" y2="50"/>
-                    </svg>
                 </div>
 
-                <!-- 상세 정보 패널 -->
-                <div id="detailPanel" class="mt-8 p-6 bg-white rounded-xl shadow-lg hidden">
-                    <div id="detailContent"></div>
+                <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="text-center">
+                        <i class="fas fa-bolt text-4xl text-mokpo-yellow mb-4"></i>
+                        <div class="text-3xl font-bold mb-2">&lt; 50ms</div>
+                        <div class="text-sm opacity-90">평균 응답 시간</div>
+                        <div class="text-xs opacity-75 mt-2">Redis 캐싱 최적화</div>
+                    </div>
+                </div>
+
+                <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-4xl text-mokpo-yellow mb-4"></i>
+                        <div class="text-3xl font-bold mb-2">99.9%</div>
+                        <div class="text-sm opacity-90">서비스 가용성</div>
+                        <div class="text-xs opacity-75 mt-2">Multi-AZ 배포</div>
+                    </div>
+                </div>
+
+                <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="text-center">
+                        <i class="fas fa-brain text-4xl text-mokpo-yellow mb-4"></i>
+                        <div class="text-3xl font-bold mb-2">95%+</div>
+                        <div class="text-sm opacity-90">AI 추천 정확도</div>
+                        <div class="text-xs opacity-75 mt-2">딥러닝 모델 최적화</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- 기술 스택 -->
-            <div class="tech-stack rounded-3xl p-8 text-white">
-                <h3 class="text-3xl font-bold text-center mb-8">핵심 기술 스택</h3>
-                <div class="grid md:grid-cols-4 gap-8">
+            <!-- 확장성 로드맵 -->
+            <div class="mt-16 bg-white bg-opacity-10 rounded-3xl p-8 backdrop-blur-sm">
+                <h3 class="text-3xl font-bold text-center mb-8">확장성 로드맵</h3>
+                <div class="grid md:grid-cols-3 gap-8">
                     <div class="text-center">
-                        <div class="tech-icon mb-4">
-                            <i class="fas fa-brain text-3xl"></i>
+                        <div class="w-16 h-16 bg-mokpo-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-mokpo-navy">1</span>
                         </div>
-                        <h4 class="text-xl font-bold mb-3">AI/ML</h4>
+                        <h4 class="text-xl font-bold mb-3">Phase 1: MVP</h4>
                         <ul class="text-sm opacity-90 space-y-1">
-                            <li>• 추천 알고리즘</li>
-                            <li>• 자연어 처리</li>
-                            <li>• 예측 분석</li>
-                            <li>• 패턴 인식</li>
+                            <li>• 기본 플랫폼 구축</li>
+                            <li>• 핵심 기능 구현</li>
+                            <li>• 1,000명 사용자 지원</li>
+                            <li>• 단일 리전 배포</li>
                         </ul>
                     </div>
+                    
                     <div class="text-center">
-                        <div class="tech-icon mb-4">
-                            <i class="fas fa-cube text-3xl"></i>
+                        <div class="w-16 h-16 bg-mokpo-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-mokpo-navy">2</span>
                         </div>
-                        <h4 class="text-xl font-bold mb-3">블록체인</h4>
+                        <h4 class="text-xl font-bold mb-3">Phase 2: Scale</h4>
                         <ul class="text-sm opacity-90 space-y-1">
-                            <li>• 스마트 컨트랙트</li>
-                            <li>• 목포페이 연동</li>
-                            <li>• 투명한 거래</li>
-                            <li>• 분산 저장</li>
+                            <li>• AI 고도화</li>
+                            <li>• 마이크로서비스 전환</li>
+                            <li>• 10,000명 사용자 지원</li>
+                            <li>• 멀티 리전 배포</li>
                         </ul>
                     </div>
+                    
                     <div class="text-center">
-                        <div class="tech-icon mb-4">
-                            <i class="fas fa-satellite-dish text-3xl"></i>
+                        <div class="w-16 h-16 bg-mokpo-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-mokpo-navy">3</span>
                         </div>
-                        <h4 class="text-xl font-bold mb-3">IoT</h4>
+                        <h4 class="text-xl font-bold mb-3">Phase 3: Global</h4>
                         <ul class="text-sm opacity-90 space-y-1">
-                            <li>• 센서 네트워크</li>
-                            <li>• 실시간 모니터링</li>
-                            <li>• 환경 감지</li>
-                            <li>• 안전 관리</li>
-                        </ul>
-                    </div>
-                    <div class="text-center">
-                        <div class="tech-icon mb-4">
-                            <i class="fas fa-cloud text-3xl"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-3">클라우드</h4>
-                        <ul class="text-sm opacity-90 space-y-1">
-                            <li>• 확장성 보장</li>
-                            <li>• 데이터 보안</li>
-                            <li>• 백업 시스템</li>
-                            <li>• 실시간 동기화</li>
+                            <li>• 글로벌 서비스</li>
+                            <li>• 완전 자동화</li>
+                            <li>• 100,000명+ 사용자</li>
+                            <li>• 월드와이드 CDN</li>
                         </ul>
                     </div>
                 </div>
@@ -1033,9 +1631,7 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
     <script>
-        // 솔루션 페이지 전용 JavaScript
         document.addEventListener('DOMContentLoaded', function() {
             // 탭 전환 기능
             const tabButtons = document.querySelectorAll('.tab-button');
@@ -1055,137 +1651,196 @@
                 });
             });
 
-            // 아키텍처 다이어그램 인터랙션
-            window.showDetail = function(type) {
-                const detailPanel = document.getElementById('detailPanel');
-                const detailContent = document.getElementById('detailContent');
-                
+            // 뷰 전환 기능
+            const viewButtons = document.querySelectorAll('[data-view]');
+            const architectureViews = document.querySelectorAll('.architecture-view');
+
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetView = this.dataset.view + '-view';
+
+                    // 모든 버튼과 뷰 비활성화
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    architectureViews.forEach(view => view.classList.add('hidden'));
+
+                    // 선택된 버튼과 뷰 활성화
+                    this.classList.add('active');
+                    document.getElementById(targetView).classList.remove('hidden');
+                });
+            });
+
+            // 데이터 흐름 노드 클릭 이벤트
+            const dataNodes = document.querySelectorAll('.data-node');
+            dataNodes.forEach(node => {
+                node.addEventListener('click', function() {
+                    const info = this.dataset.info;
+                    showFlowDetails(info);
+                });
+            });
+
+            function showFlowDetails(type) {
                 const details = {
-                    platform: {
-                        title: '🌐 목포 커넥트 통합 플랫폼',
+                    'user-input': {
+                        title: '사용자 입력',
+                        content: '관광객의 선호도, 일정, 예산 등의 정보가 입력되어 개인화 분석의 기초 데이터가 됩니다.'
+                    },
+                    'ai-processing': {
+                        title: 'AI 분석 엔진',
+                        content: '머신러닝 알고리즘을 통해 사용자 데이터를 분석하고 최적의 매칭을 위한 패턴을 식별합니다.'
+                    },
+                    'matching-engine': {
+                        title: '매칭 엔진',
+                        content: 'AI 분석 결과를 바탕으로 관광객과 청년 크리에이터를 실시간으로 매칭합니다.'
+                    },
+                    'blockchain': {
+                        title: '블록체인 결제',
+                        content: '목포페이와 연동된 스마트 컨트랙트로 투명하고 안전한 거래를 처리합니다.'
+                    },
+                    'iot-sensors': {
+                        title: 'IoT 센서',
+                        content: '체험 현장의 환경 데이터와 참여자 만족도를 실시간으로 모니터링합니다.'
+                    }
+                };
+
+                if (details[type]) {
+                    document.getElementById('flow-detail-content').innerHTML = `
+                        <h4 class="text-lg font-bold mb-2">${details[type].title}</h4>
+                        <p class="text-gray-600">${details[type].content}</p>
+                    `;
+                }
+            }
+
+            // 기술 헥사곤 클릭 이벤트
+            const techHexagons = document.querySelectorAll('.tech-hexagon');
+            techHexagons.forEach(hexagon => {
+                hexagon.addEventListener('click', function() {
+                    const tech = this.dataset.tech;
+                    showTechDetails(tech);
+                });
+            });
+
+            function showTechDetails(tech) {
+                const details = {
+                    'ai': {
+                        title: 'AI/ML 기술 스택',
                         content: `
-                            <h4 class="text-xl font-bold mb-4">핵심 기능</h4>
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="grid md:grid-cols-2 gap-4">
                                 <div>
-                                    <h5 class="font-semibold mb-2">AI 기반 서비스</h5>
+                                    <h5 class="font-bold mb-2">추천 알고리즘</h5>
                                     <ul class="text-sm space-y-1">
-                                        <li>• 개인화 추천 알고리즘</li>
-                                        <li>• 실시간 매칭 시스템</li>
-                                        <li>• 감정 분석 기반 만족도 예측</li>
-                                        <li>• 자동 일정 최적화</li>
+                                        <li>• Collaborative Filtering</li>
+                                        <li>• Content-based Filtering</li>
+                                        <li>• Deep Learning (TensorFlow)</li>
+                                        <li>• Natural Language Processing</li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h5 class="font-semibold mb-2">블록체인 통합</h5>
+                                    <h5 class="font-bold mb-2">예측 분석</h5>
                                     <ul class="text-sm space-y-1">
-                                        <li>• 목포페이 스마트 컨트랙트</li>
-                                        <li>• 리뷰 위변조 방지</li>
-                                        <li>• 투명한 수익 분배</li>
-                                        <li>• 탈중앙화 거버넌스</li>
+                                        <li>• 사용자 행동 예측</li>
+                                        <li>• 수요 예측</li>
+                                        <li>• 만족도 예측</li>
+                                        <li>• 이탈률 분석</li>
                                     </ul>
                                 </div>
                             </div>
                         `
                     },
-                    youth: {
-                        title: '👨‍💼 청년 창업가',
+                    'blockchain': {
+                        title: '블록체인 기술 스택',
                         content: `
-                            <h4 class="text-xl font-bold mb-4">목포 거주 18-39세 청년</h4>
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="grid md:grid-cols-2 gap-4">
                                 <div>
-                                    <h5 class="font-semibold mb-2">제공 혜택</h5>
+                                    <h5 class="font-bold mb-2">플랫폼</h5>
                                     <ul class="text-sm space-y-1">
-                                        <li>• 체계적 교육 및 멘토링</li>
-                                        <li>• 창작 공간 무료 제공</li>
-                                        <li>• 마케팅 지원</li>
-                                        <li>• 안정적 수익 창출</li>
+                                        <li>• Ethereum/Polygon</li>
+                                        <li>• Smart Contracts</li>
+                                        <li>• Web3.js Integration</li>
+                                        <li>• IPFS 분산 저장</li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h5 class="font-semibold mb-2">예상 수익 구조</h5>
+                                    <h5 class="font-bold mb-2">목포페이 연동</h5>
                                     <ul class="text-sm space-y-1">
-                                        <li>• 초기: 월 100-200만원</li>
-                                        <li>• 성장기: 월 300-500만원</li>
-                                        <li>• 안정기: 월 500만원+</li>
-                                        <li>• 수수료: 플랫폼 수수료 5%</li>
+                                        <li>• 지역화폐 API</li>
+                                        <li>• 자동 정산 시스템</li>
+                                        <li>• 투명한 거래 기록</li>
+                                        <li>• 수수료 자동 분배</li>
                                     </ul>
                                 </div>
                             </div>
                         `
                     },
-                    tourist: {
-                        title: '✈️ 관광객',
+                    'iot': {
+                        title: 'IoT 기술 스택',
                         content: `
-                            <h4 class="text-xl font-bold mb-4">목포를 찾는 모든 관광객</h4>
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="grid md:grid-cols-2 gap-4">
                                 <div>
-                                    <h5 class="font-semibold mb-2">제공 서비스</h5>
+                                    <h5 class="font-bold mb-2">센서 네트워크</h5>
                                     <ul class="text-sm space-y-1">
-                                        <li>• AI 맞춤형 추천</li>
-                                        <li>• 원클릭 예약 시스템</li>
-                                        <li>• 실시간 가이드</li>
+                                        <li>• 환경 센서 (온도, 습도)</li>
+                                        <li>• 인원 카운팅 센서</li>
+                                        <li>• 안전 모니터링</li>
+                                        <li>• 위치 추적 (GPS/Bluetooth)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">데이터 처리</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• MQTT 프로토콜</li>
+                                        <li>• Edge Computing</li>
+                                        <li>• 실시간 대시보드</li>
+                                        <li>• 예측 유지보수</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'cloud': {
+                        title: '클라우드 기술 스택',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">인프라</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• AWS/Azure Multi-Cloud</li>
+                                        <li>• Kubernetes Orchestration</li>
+                                        <li>• Auto Scaling</li>
+                                        <li>• Load Balancer</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">DevOps</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• CI/CD Pipeline</li>
+                                        <li>• Docker Container</li>
+                                        <li>• Monitoring (Prometheus)</li>
+                                        <li>• Backup & Recovery</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'mobile': {
+                        title: '모바일 기술 스택',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">앱 개발</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• React Native</li>
+                                        <li>• Progressive Web App</li>
+                                        <li>• Push Notification</li>
+                                        <li>• Offline Capability</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">기능</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• GPS 위치 서비스</li>
+                                        <li>• 카메라/갤러리 통합</li>
                                         <li>• 소셜 미디어 연동</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mb-2">특별 혜택</h5>
-                                    <ul class="text-sm space-y-1">
-                                        <li>• 목포페이 5% 추가 적립</li>
-                                        <li>• VIP 프로그램 제공</li>
-                                        <li>• 재방문시 10% 할인</li>
-                                        <li>• 지역 할인 쿠폰</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    local: {
-                        title: '🏪 지역상인',
-                        content: `
-                            <h4 class="text-xl font-bold mb-4">목포시 소상공인 및 자영업자</h4>
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h5 class="font-semibold mb-2">연계 방안</h5>
-                                    <ul class="text-sm space-y-1">
-                                        <li>• 체험 프로그램 연계</li>
-                                        <li>• 패키지 상품 개발</li>
-                                        <li>• 공동 마케팅</li>
-                                        <li>• 할인 혜택 제공</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mb-2">기대 효과</h5>
-                                    <ul class="text-sm space-y-1">
-                                        <li>• 매출 20-30% 증가</li>
-                                        <li>• 신규 고객 유입</li>
-                                        <li>• 브랜드 인지도 향상</li>
-                                        <li>• 경쟁력 강화</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    city: {
-                        title: '🏛️ 목포시',
-                        content: `
-                            <h4 class="text-xl font-bold mb-4">목포시 및 지역 기관</h4>
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h5 class="font-semibold mb-2">정책 효과</h5>
-                                    <ul class="text-sm space-y-1">
-                                        <li>• 청년층 정착률 향상</li>
-                                        <li>• 지역경제 활성화</li>
-                                        <li>• 도시 브랜드 강화</li>
-                                        <li>• 투자 유치 증대</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mb-2">재정 효과</h5>
-                                    <ul class="text-sm space-y-1">
-                                        <li>• 세수 증대: 연 5억원</li>
-                                        <li>• 고용 창출: 700개</li>
-                                        <li>• 관광수입: 135억원</li>
-                                        <li>• ROI: 900% 이상</li>
+                                        <li>• 생체 인증</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1193,60 +1848,310 @@
                     }
                 };
 
-                if (details[type]) {
-                    detailContent.innerHTML = details[type].content;
-                    detailPanel.classList.remove('hidden');
-
-                    // 스크롤 애니메이션
-                    detailPanel.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
+                if (details[tech]) {
+                    document.getElementById('tech-detail-content').innerHTML = `
+                        <h4 class="text-lg font-bold mb-4">${details[tech].title}</h4>
+                        ${details[tech].content}
+                    `;
                 }
-            };
+            }
 
-            // 기술 아이콘 회전 효과
-            const techIcons = document.querySelectorAll('.tech-icon');
-            techIcons.forEach((icon, index) => {
-                setTimeout(() => {
-                    icon.style.animationDelay = `${index * 0.2}s`;
-                }, 100);
-            });
-
-            // 플랫폼 레이어 호버 효과
-            const platformLayers = document.querySelectorAll('.platform-layer');
-            platformLayers.forEach(layer => {
-                layer.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.05)';
-                });
-                
-                layer.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
+            // 컴포넌트 클릭 이벤트
+            const components = document.querySelectorAll('.component-item');
+            components.forEach(component => {
+                component.addEventListener('click', function() {
+                    const comp = this.dataset.component;
+                    showComponentDetails(comp);
                 });
             });
 
-            // 스크롤 애니메이션
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+            function showComponentDetails(component) {
+                const details = {
+                    'user-management': {
+                        title: '사용자 관리 시스템',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">주요 기능</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 회원가입/로그인</li>
+                                        <li>• 프로필 관리</li>
+                                        <li>• 권한 관리</li>
+                                        <li>• 활동 이력</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">기술 스택</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• JWT 토큰 인증</li>
+                                        <li>• OAuth 2.0</li>
+                                        <li>• Role-based Access</li>
+                                        <li>• Session 관리</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'recommendation': {
+                        title: 'AI 추천 시스템',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">추천 알고리즘</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Collaborative Filtering</li>
+                                        <li>• Content-based Filtering</li>
+                                        <li>• Matrix Factorization</li>
+                                        <li>• Deep Learning</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">성능 지표</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 정확도: 95%+</li>
+                                        <li>• 응답시간: <100ms</li>
+                                        <li>• 다양성 점수: 0.8</li>
+                                        <li>• 참신성 점수: 0.7</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'booking': {
+                        title: '예약 관리 시스템',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">예약 기능</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 실시간 예약</li>
+                                        <li>• 일정 관리</li>
+                                        <li>• 자동 알림</li>
+                                        <li>• 취소/변경</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">관리 기능</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 대기열 관리</li>
+                                        <li>• 오버부킹 방지</li>
+                                        <li>• 통계 분석</li>
+                                        <li>• 리포팅</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'payment': {
+                        title: '결제 시스템',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">결제 방식</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 목포페이 연동</li>
+                                        <li>• 신용카드</li>
+                                        <li>• 계좌이체</li>
+                                        <li>• 간편결제</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">보안 기능</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• PCI DSS 준수</li>
+                                        <li>• 토큰화</li>
+                                        <li>• 이중 인증</li>
+                                        <li>• 거래 모니터링</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'monitoring': {
+                        title: '모니터링 시스템',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">모니터링 항목</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 시스템 성능</li>
+                                        <li>• 사용자 활동</li>
+                                        <li>• 에러 추적</li>
+                                        <li>• 보안 이벤트</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">도구</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Prometheus</li>
+                                        <li>• Grafana</li>
+                                        <li>• ELK Stack</li>
+                                        <li>• APM Tools</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'core': {
+                        title: '코어 엔진',
+                        content: `
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-bold mb-2">핵심 기능</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 서비스 오케스트레이션</li>
+                                        <li>• 이벤트 처리</li>
+                                        <li>• 데이터 동기화</li>
+                                        <li>• 워크플로 관리</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-2">아키텍처</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 마이크로서비스</li>
+                                        <li>• Event-driven</li>
+                                        <li>• CQRS 패턴</li>
+                                        <li>• Saga 패턴</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
                     }
-                });
-            }, { threshold: 0.1 });
+                };
 
-            // 애니메이션 대상 요소들 선택
-            const animateElements = document.querySelectorAll('.card-hover, .journey-step, .scenario-card');
-            animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.6s ease';
-                observer.observe(el);
-            });
+                if (details[component]) {
+                    document.getElementById('component-detail-content').innerHTML = `
+                        <h4 class="text-lg font-bold mb-4">${details[component].title}</h4>
+                        ${details[component].content}
+                    `;
+                }
+            }
+
+            // 실시간 시뮬레이션
+            let simulationInterval;
+            let isSimulationRunning = false;
+
+            document.getElementById('start-simulation').addEventListener('click', startSimulation);
+            document.getElementById('stop-simulation').addEventListener('click', stopSimulation);
+            document.getElementById('reset-simulation').addEventListener('click', resetSimulation);
+
+            function startSimulation() {
+                if (isSimulationRunning) return;
+                
+                isSimulationRunning = true;
+                const consoleOutput = document.getElementById('console-output');
+                
+                const logMessages = [
+                    '[INFO] 사용자 로그인 - ID: user1247',
+                    '[INFO] AI 추천 요청 - 사용자 선호도 분석 중...',
+                    '[SUCCESS] 매칭 완료 - 3개 프로그램 추천',
+                    '[INFO] 예약 요청 - 프로그램: 세발낙지 체험',
+                    '[SUCCESS] 목포페이 결제 완료 - 45,000원',
+                    '[INFO] IoT 센서 활성화 - 체험장 모니터링 시작',
+                    '[WARNING] 동시 접속자 증가 - 스케일링 중...',
+                    '[SUCCESS] 인스턴스 추가 완료',
+                    '[INFO] 블록체인 트랜잭션 처리 중...',
+                    '[SUCCESS] 리뷰 등록 완료 - 평점: 4.8/5.0'
+                ];
+
+                let messageIndex = 0;
+                
+                simulationInterval = setInterval(() => {
+                    if (messageIndex < logMessages.length) {
+                        const logLine = document.createElement('div');
+                        logLine.className = 'console-line';
+                        logLine.style.animationDelay = '0s';
+                        logLine.textContent = `[${new Date().toLocaleTimeString()}] ${logMessages[messageIndex]}`;
+                        consoleOutput.appendChild(logLine);
+                        
+                        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                        messageIndex++;
+                    } else {
+                        messageIndex = 0; // 반복
+                    }
+
+                    // 메트릭 업데이트
+                    updateMetrics();
+                }, 1000);
+            }
+
+            function stopSimulation() {
+                if (simulationInterval) {
+                    clearInterval(simulationInterval);
+                    isSimulationRunning = false;
+                }
+            }
+
+            function resetSimulation() {
+                stopSimulation();
+                document.getElementById('console-output').innerHTML = '';
+                
+                // 메트릭 초기화
+                document.getElementById('active-users').textContent = '1,247';
+                document.getElementById('api-requests').textContent = '342';
+                document.getElementById('response-time').textContent = '23';
+                document.getElementById('ai-accuracy').textContent = '94.2%';
+            }
+
+            function updateMetrics() {
+                // 랜덤 값으로 메트릭 업데이트
+                const activeUsers = Math.floor(Math.random() * 2000) + 1000;
+                const apiRequests = Math.floor(Math.random() * 500) + 200;
+                const responseTime = Math.floor(Math.random() * 50) + 10;
+                const aiAccuracy = (Math.random() * 5 + 90).toFixed(1);
+
+                document.getElementById('active-users').textContent = activeUsers.toLocaleString();
+                document.getElementById('api-requests').textContent = apiRequests;
+                document.getElementById('response-time').textContent = responseTime;
+                document.getElementById('ai-accuracy').textContent = aiAccuracy + '%';
+
+                // 프로그레스 바 업데이트
+                document.getElementById('users-bar').style.width = Math.min(activeUsers / 2000 * 100, 100) + '%';
+                document.getElementById('api-bar').style.width = Math.min(apiRequests / 500 * 100, 100) + '%';
+                document.getElementById('response-bar').style.width = Math.min((60 - responseTime) / 60 * 100, 100) + '%';
+                document.getElementById('accuracy-bar').style.width = aiAccuracy + '%';
+            }
+
+            // 데이터 파티클 애니메이션 (간단한 버전)
+            function createDataParticles() {
+                const dataFlow = document.querySelector('.data-flow');
+                if (!dataFlow) return;
+
+                setInterval(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'data-particle';
+                    particle.style.left = '50px';
+                    particle.style.top = '50px';
+                    dataFlow.appendChild(particle);
+
+                    // 파티클 애니메이션
+                    let progress = 0;
+                    const animate = () => {
+                        progress += 0.02;
+                        if (progress >= 1) {
+                            particle.remove();
+                            return;
+                        }
+
+                        // 간단한 경로 애니메이션
+                        const x = 50 + (progress * 300);
+                        const y = 50 + Math.sin(progress * Math.PI) * 100;
+                        
+                        particle.style.left = x + 'px';
+                        particle.style.top = y + 'px';
+                        particle.style.opacity = 1 - progress;
+
+                        requestAnimationFrame(animate);
+                    };
+                    requestAnimationFrame(animate);
+                }, 500);
+            }
+
+            // 초기화
+            if (document.getElementById('flow-view')) {
+                createDataParticles();
+            }
         });
     </script>
-    
-    <!-- 실시간 채팅 상담 기능 -->
-    <script src="live-chat-support.js"></script>
 </body>
 </html>
